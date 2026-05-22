@@ -18,41 +18,46 @@ body{
     background:#000;
     color:#fff;
     font-family:Arial,sans-serif;
-    padding:40px 24px;
-    min-height:100vh;
+    padding:40px 20px;
 }
 
 .container{
-    max-width:760px;
+    max-width:850px;
     margin:auto;
 }
 
-.logo{
-    text-align:center;
-    font-size:58px;
-    margin-bottom:12px;
-    opacity:0.9;
+.scp-logo{
+    width:90px;
+    height:90px;
+    margin:auto;
+    border:2px solid #fff;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    margin-bottom:20px;
 }
 
 .title{
     text-align:center;
-    font-size:42px;
-    font-weight:700;
+    font-size:44px;
     letter-spacing:4px;
+    font-weight:700;
 }
 
 .sub{
     text-align:center;
     color:#666;
-    margin-top:8px;
-    margin-bottom:40px;
+    margin-top:10px;
+    margin-bottom:45px;
 }
 
 .warning{
     border:1px solid #222;
     padding:14px;
     color:#888;
-    margin-bottom:40px;
+    margin-bottom:30px;
     font-size:14px;
 }
 
@@ -62,30 +67,34 @@ body{
 
 .card{
     border:1px solid #222;
-    padding:24px;
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
-.card h2{
+.card-title{
+    padding:20px;
     font-size:22px;
-    margin-bottom:18px;
+    border-bottom:1px solid #111;
 }
 
-.dept{
-    padding:14px 0;
+.item{
+    display:block;
+    text-decoration:none;
+    color:white;
+    padding:16px 20px;
     border-top:1px solid #111;
+    transition:0.2s;
 }
 
-.dept:first-child{
-    border-top:none;
+.item:hover{
+    background:#080808;
 }
 
-.dept-name{
+.item-name{
     font-size:16px;
     margin-bottom:5px;
 }
 
-.dept-desc{
+.item-desc{
     color:#666;
     font-size:13px;
 }
@@ -94,21 +103,10 @@ body{
     color:#60a5fa;
 }
 
-.join{
-    text-decoration:none;
-    color:white;
-    display:block;
-    transition:0.2s;
-}
-
-.join:hover{
-    background:#080808;
-}
-
 .footer{
-    margin-top:55px;
     text-align:center;
     color:#444;
+    margin-top:50px;
     font-size:12px;
 }
 
@@ -119,7 +117,7 @@ body{
 
 <div class="container">
 
-<div class="logo">
+<div class="scp-logo">
 ☣
 </div>
 
@@ -138,84 +136,176 @@ NIGHT 内部数据库 / SCP:RP
 
 <div class="card">
 
-<h2>部门</h2>
+<div class="card-title">
+部门
+</div>
 
-<div class="dept">
-<div class="dept-name">
+<a class="item" href="#">
+<div class="item-name">
 安保部门 Security Department
 </div>
-<div class="dept-desc">
-负责站点内部安全与武装防御
+<div class="item-desc">
+负责站点武装防御与日常安全
 </div>
-</div>
+</a>
 
-<div class="dept">
-<div class="dept-name">
+<a class="item" href="#">
+<div class="item-name">
 内部安全部门 Internal Security Department
 </div>
-<div class="dept-desc">
-负责内部监察、权限审查与异常调查
+<div class="item-desc">
+负责内部监察与权限审查
 </div>
-</div>
+</a>
 
-<div class="dept">
-<div class="dept-name">
-机动特遣队 MTF
-</div>
-<div class="dept-desc">
-负责异常事件处理与高危险收容行动
-</div>
-</div>
-
-<div class="dept">
-<div class="dept-name">
+<a class="item" href="#">
+<div class="item-name">
 研究部门 Research Department
 </div>
-<div class="dept-desc">
+<div class="item-desc">
 负责 SCP 项目的研究与实验
 </div>
-</div>
+</a>
 
-<div class="dept">
-<div class="dept-name">
+<a class="item" href="#">
+<div class="item-name">
 医疗部门 Medical Department
 </div>
-<div class="dept-desc">
+<div class="item-desc">
 负责人员医疗与异常治疗
 </div>
-</div>
+</a>
 
-<div class="dept">
-<div class="dept-name">
+<a class="item" href="#">
+<div class="item-name">
 情报部门 Intelligence Agency
 </div>
-<div class="dept-desc">
-负责情报收集与站点调查
+<div class="item-desc">
+负责站点调查与情报收集
 </div>
-</div>
+</a>
 
-<div class="dept">
-<div class="dept-name goc">
+<a class="item" href="#">
+<div class="item-name goc">
 全球超自然联盟 GOC
 </div>
-<div class="dept-desc">
-负责超自然武装行动与全球异常威胁处理
+<div class="item-desc">
+负责全球异常武装行动
 </div>
+</a>
+
 </div>
+
+<div class="card">
+
+<div class="card-title">
+MTF 机动特遣队
+</div>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Alpha-1 “Red Right Hand”
+</div>
+<div class="item-desc">
+直属 O5 的最高级特遣队
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Epsilon-11 “Nine-Tailed Fox”
+</div>
+<div class="item-desc">
+负责站点失控收容事件
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Nu-7 “Hammer Down”
+</div>
+<div class="item-desc">
+大型军事异常处理部队
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Tau-5 “Samsara”
+</div>
+<div class="item-desc">
+基金会高度机密特遣队
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Beta-7 “Maz Hatters”
+</div>
+<div class="item-desc">
+危险化学与生化异常处理
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Omega-7 “Pandora's Box”
+</div>
+<div class="item-desc">
+利用异常实体执行任务
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Gamma-6 “Deep Feeders”
+</div>
+<div class="item-desc">
+地下异常探索与调查
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Eta-10 “See No Evil”
+</div>
+<div class="item-desc">
+视觉异常与认知危害处理
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Zeta-9 “Mole Rats”
+</div>
+<div class="item-desc">
+地下设施与洞穴行动
+</div>
+</a>
+
+<a class="item" href="#">
+<div class="item-name">
+MTF Psi-8 “Silencers”
+</div>
+<div class="item-desc">
+超自然静默暗杀行动
+</div>
+</a>
 
 </div>
 
 <a
-class="card join"
+class="item"
 href="https://qm.qq.com/q/AP811As4fe"
 target="_blank"
+style="border:1px solid #222;"
 >
 
-<h2>点击加入</h2>
+<div class="item-name">
+点击加入
+</div>
 
-<div class="dept-desc">
-点击链接加入群聊：
-
+<div class="item-desc">
 【［☆］SITE-84 ［☆］（rbx联邦）】
 </div>
 
