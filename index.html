@@ -22,26 +22,21 @@ body{
 }
 
 .container{
-    max-width:850px;
+    max-width:760px;
     margin:auto;
 }
 
-.scp-logo{
-    width:90px;
-    height:90px;
+.logo{
+    width:110px;
+    display:block;
     margin:auto;
-    border:2px solid #fff;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:42px;
     margin-bottom:20px;
+    filter:brightness(0) invert(1);
 }
 
 .title{
     text-align:center;
-    font-size:44px;
+    font-size:42px;
     letter-spacing:4px;
     font-weight:700;
 }
@@ -49,7 +44,7 @@ body{
 .sub{
     text-align:center;
     color:#666;
-    margin-top:10px;
+    margin-top:8px;
     margin-bottom:45px;
 }
 
@@ -66,47 +61,34 @@ body{
 }
 
 .card{
-    border:1px solid #222;
-    margin-bottom:20px;
-}
-
-.card-title{
-    padding:20px;
-    font-size:22px;
-    border-bottom:1px solid #111;
-}
-
-.item{
     display:block;
     text-decoration:none;
     color:white;
-    padding:16px 20px;
-    border-top:1px solid #111;
+    border:1px solid #222;
+    padding:24px;
+    margin-bottom:18px;
     transition:0.2s;
 }
 
-.item:hover{
+.card:hover{
     background:#080808;
+    border-color:#444;
 }
 
-.item-name{
-    font-size:16px;
-    margin-bottom:5px;
+.card h2{
+    font-size:22px;
+    margin-bottom:8px;
 }
 
-.item-desc{
+.card p{
     color:#666;
-    font-size:13px;
-}
-
-.goc{
-    color:#60a5fa;
+    font-size:14px;
 }
 
 .footer{
     text-align:center;
     color:#444;
-    margin-top:50px;
+    margin-top:55px;
     font-size:12px;
 }
 
@@ -117,16 +99,17 @@ body{
 
 <div class="container">
 
-<div class="scp-logo">
-☣
-</div>
+<img
+class="logo"
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/SCP_Foundation_%28emblem%29.svg/2048px-SCP_Foundation_%28emblem%29.svg.png"
+>
 
 <div class="title">
 SITE-84
 </div>
 
 <div class="sub">
-NIGHT 内部数据库 / SCP:RP
+NIGHT 内部数据库
 </div>
 
 <div class="warning">
@@ -134,180 +117,31 @@ NIGHT 内部数据库 / SCP:RP
 未授权访问将被记录
 </div>
 
-<div class="card">
+<a class="card" href="departments.html">
 
-<div class="card-title">
+<h2>
 部门
-</div>
+</h2>
 
-<a class="item" href="#">
-<div class="item-name">
-安保部门 Security Department
-</div>
-<div class="item-desc">
-负责站点武装防御与日常安全
-</div>
+<p>
+查看 Site-84 部门数据库
+</p>
+
 </a>
-
-<a class="item" href="#">
-<div class="item-name">
-内部安全部门 Internal Security Department
-</div>
-<div class="item-desc">
-负责内部监察与权限审查
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-研究部门 Research Department
-</div>
-<div class="item-desc">
-负责 SCP 项目的研究与实验
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-医疗部门 Medical Department
-</div>
-<div class="item-desc">
-负责人员医疗与异常治疗
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-情报部门 Intelligence Agency
-</div>
-<div class="item-desc">
-负责站点调查与情报收集
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name goc">
-全球超自然联盟 GOC
-</div>
-<div class="item-desc">
-负责全球异常武装行动
-</div>
-</a>
-
-</div>
-
-<div class="card">
-
-<div class="card-title">
-MTF 机动特遣队
-</div>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Alpha-1 “Red Right Hand”
-</div>
-<div class="item-desc">
-直属 O5 的最高级特遣队
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Epsilon-11 “Nine-Tailed Fox”
-</div>
-<div class="item-desc">
-负责站点失控收容事件
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Nu-7 “Hammer Down”
-</div>
-<div class="item-desc">
-大型军事异常处理部队
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Tau-5 “Samsara”
-</div>
-<div class="item-desc">
-基金会高度机密特遣队
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Beta-7 “Maz Hatters”
-</div>
-<div class="item-desc">
-危险化学与生化异常处理
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Omega-7 “Pandora's Box”
-</div>
-<div class="item-desc">
-利用异常实体执行任务
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Gamma-6 “Deep Feeders”
-</div>
-<div class="item-desc">
-地下异常探索与调查
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Eta-10 “See No Evil”
-</div>
-<div class="item-desc">
-视觉异常与认知危害处理
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Zeta-9 “Mole Rats”
-</div>
-<div class="item-desc">
-地下设施与洞穴行动
-</div>
-</a>
-
-<a class="item" href="#">
-<div class="item-name">
-MTF Psi-8 “Silencers”
-</div>
-<div class="item-desc">
-超自然静默暗杀行动
-</div>
-</a>
-
-</div>
 
 <a
-class="item"
+class="card"
 href="https://qm.qq.com/q/AP811As4fe"
 target="_blank"
-style="border:1px solid #222;"
 >
 
-<div class="item-name">
+<h2>
 点击加入
-</div>
+</h2>
 
-<div class="item-desc">
-【［☆］SITE-84 ［☆］（rbx联邦）】
-</div>
+<p>
+加入 SITE-84 官方群聊
+</p>
 
 </a>
 
