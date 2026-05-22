@@ -18,37 +18,34 @@ body{
     background:#000;
     color:#fff;
     font-family:Arial,sans-serif;
-    min-height:100vh;
     padding:40px 24px;
+    min-height:100vh;
 }
 
 .container{
-    max-width:700px;
+    max-width:760px;
     margin:auto;
 }
 
-.logo-box{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-bottom:10px;
-}
-
 .logo{
-    width:54px;
+    text-align:center;
+    font-size:58px;
+    margin-bottom:12px;
     opacity:0.9;
 }
 
 .title{
-    font-size:40px;
-    letter-spacing:4px;
+    text-align:center;
+    font-size:42px;
     font-weight:700;
+    letter-spacing:4px;
 }
 
 .sub{
+    text-align:center;
     color:#666;
+    margin-top:8px;
     margin-bottom:40px;
-    margin-left:70px;
 }
 
 .warning{
@@ -63,37 +60,54 @@ body{
     color:#991b1b;
 }
 
-.menu{
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-}
-
 .card{
     border:1px solid #222;
-    padding:22px;
-    text-decoration:none;
-    color:white;
-    transition:0.2s;
-}
-
-.card:hover{
-    background:#0a0a0a;
-    border-color:#444;
+    padding:24px;
+    margin-bottom:18px;
 }
 
 .card h2{
-    font-size:20px;
-    margin-bottom:6px;
+    font-size:22px;
+    margin-bottom:18px;
 }
 
-.card p{
+.dept{
+    padding:14px 0;
+    border-top:1px solid #111;
+}
+
+.dept:first-child{
+    border-top:none;
+}
+
+.dept-name{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+.dept-desc{
     color:#666;
-    font-size:14px;
+    font-size:13px;
+}
+
+.goc{
+    color:#60a5fa;
+}
+
+.join{
+    text-decoration:none;
+    color:white;
+    display:block;
+    transition:0.2s;
+}
+
+.join:hover{
+    background:#080808;
 }
 
 .footer{
-    margin-top:60px;
+    margin-top:55px;
+    text-align:center;
     color:#444;
     font-size:12px;
 }
@@ -105,21 +119,16 @@ body{
 
 <div class="container">
 
-<div class="logo-box">
-
-<img
-class="logo"
-src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/SCP_Foundation_%28emblem%29.svg/2048px-SCP_Foundation_%28emblem%29.svg.png"
->
+<div class="logo">
+☣
+</div>
 
 <div class="title">
 SITE-84
 </div>
 
-</div>
-
 <div class="sub">
-NIGHT 内部数据库
+NIGHT 内部数据库 / SCP:RP
 </div>
 
 <div class="warning">
@@ -127,23 +136,90 @@ NIGHT 内部数据库
 未授权访问将被记录
 </div>
 
-<div class="menu">
+<div class="card">
 
-<a class="card" href="#">
 <h2>部门</h2>
-<p>查看站点部门信息</p>
-</a>
+
+<div class="dept">
+<div class="dept-name">
+安保部门 Security Department
+</div>
+<div class="dept-desc">
+负责站点内部安全与武装防御
+</div>
+</div>
+
+<div class="dept">
+<div class="dept-name">
+内部安全部门 Internal Security Department
+</div>
+<div class="dept-desc">
+负责内部监察、权限审查与异常调查
+</div>
+</div>
+
+<div class="dept">
+<div class="dept-name">
+机动特遣队 MTF
+</div>
+<div class="dept-desc">
+负责异常事件处理与高危险收容行动
+</div>
+</div>
+
+<div class="dept">
+<div class="dept-name">
+研究部门 Research Department
+</div>
+<div class="dept-desc">
+负责 SCP 项目的研究与实验
+</div>
+</div>
+
+<div class="dept">
+<div class="dept-name">
+医疗部门 Medical Department
+</div>
+<div class="dept-desc">
+负责人员医疗与异常治疗
+</div>
+</div>
+
+<div class="dept">
+<div class="dept-name">
+情报部门 Intelligence Agency
+</div>
+<div class="dept-desc">
+负责情报收集与站点调查
+</div>
+</div>
+
+<div class="dept">
+<div class="dept-name goc">
+全球超自然联盟 GOC
+</div>
+<div class="dept-desc">
+负责超自然武装行动与全球异常威胁处理
+</div>
+</div>
+
+</div>
 
 <a
-class="card"
+class="card join"
 href="https://qm.qq.com/q/AP811As4fe"
 target="_blank"
 >
-<h2>点击加入</h2>
-<p>点击链接加入 SITE-84 官方群聊</p>
-</a>
 
+<h2>点击加入</h2>
+
+<div class="dept-desc">
+点击链接加入群聊：
+
+【［☆］SITE-84 ［☆］（rbx联邦）】
 </div>
+
+</a>
 
 <div class="footer">
 SITE-84 INTERNAL NETWORK
