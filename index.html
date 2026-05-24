@@ -31,30 +31,37 @@ min-height:100vh;
 body::before{
 content:"";
 position:fixed;
-top:-20%;
-left:-20%;
-width:140%;
-height:140%;
+top:-30%;
+left:-30%;
+width:160%;
+height:160%;
 
 background:
 
 radial-gradient(
 circle at center,
-rgba(120,0,0,0.10),
-transparent 60%
+rgba(120,0,0,0.18),
+transparent 45%
 ),
 
 radial-gradient(
-circle at 30% 70%,
-rgba(255,255,255,0.03),
-transparent 55%
+circle at 20% 80%,
+rgba(255,255,255,0.05),
+transparent 40%
+),
+
+radial-gradient(
+circle at 80% 20%,
+rgba(80,0,0,0.12),
+transparent 35%
 );
 
-animation:bgMove 12s ease-in-out infinite alternate;
+animation:bgMove 8s ease-in-out infinite alternate;
 
 z-index:0;
 pointer-events:none;
-filter:blur(40px);
+filter:blur(70px);
+opacity:1;
 }
 
 /* 扫描线 */
@@ -71,13 +78,13 @@ pointer-events:none;
 background:
 repeating-linear-gradient(
 to bottom,
-rgba(255,255,255,0.02),
-rgba(255,255,255,0.02) 1px,
+rgba(255,255,255,0.03),
+rgba(255,255,255,0.03) 1px,
 transparent 1px,
-transparent 3px
+transparent 4px
 );
 
-opacity:0.15;
+opacity:0.18;
 
 z-index:1;
 }
@@ -92,7 +99,7 @@ position:relative;
 z-index:2;
 }
 
-/* SCP logo */
+/* logo */
 
 .logo{
 width:110px;
@@ -180,6 +187,7 @@ transition:0.25s;
 
 position:relative;
 overflow:hidden;
+backdrop-filter:blur(4px);
 }
 
 /* hover */
@@ -199,7 +207,7 @@ left:0;
 top:0;
 width:2px;
 height:100%;
-background:#666;
+background:#777;
 opacity:0;
 transition:0.3s;
 }
@@ -241,7 +249,7 @@ transform:translate(0px,0px) scale(1);
 }
 
 100%{
-transform:translate(-30px,-20px) scale(1.05);
+transform:translate(-50px,-40px) scale(1.1);
 }
 
 }
