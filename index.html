@@ -15,207 +15,213 @@ box-sizing:border-box;
 
 body{
 background:#050505;
+font-family:Arial;
 color:white;
-font-family:Arial,Helvetica,sans-serif;
 overflow-x:hidden;
-position:relative;
 }
 
-/* 动态背景 */
+/* 入场动画 */
 
-body::before{
-content:"";
+#intro{
 position:fixed;
 top:0;
 left:0;
 width:100%;
 height:100%;
-background:
-radial-gradient(circle at center,
-rgba(255,0,0,0.15),
-transparent 70%);
-animation:bgPulse 6s infinite alternate;
-z-index:-3;
+background:black;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+animation:fadeOut 1s ease forwards;
+animation-delay:4s;
 }
 
-@keyframes bgPulse{
-0%{
-transform:scale(1);
-opacity:0.4;
+#intro h1{
+font-size:50px;
+letter-spacing:8px;
+color:red;
+margin-bottom:20px;
+text-shadow:0 0 20px red;
 }
-100%{
-transform:scale(1.2);
-opacity:0.8;
+
+#intro p{
+color:#aaa;
+font-size:18px;
+margin-top:10px;
+letter-spacing:4px;
+}
+
+.loading{
+width:250px;
+height:2px;
+background:#222;
+margin-top:30px;
+overflow:hidden;
+}
+
+.loading span{
+display:block;
+height:100%;
+width:0%;
+background:red;
+animation:load 4s linear forwards;
+}
+
+@keyframes load{
+0%{width:0;}
+100%{width:100%;}
+}
+
+@keyframes fadeOut{
+to{
+opacity:0;
+visibility:hidden;
 }
 }
 
-/* 扫描线 */
+/* 背景 */
 
-.scanlines{
+body::before{
+content:"";
 position:fixed;
-top:0;
-left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle,
+rgba(255,0,0,0.12),
+transparent 70%);
+animation:bg 6s infinite alternate;
+z-index:-2;
+}
+
+@keyframes bg{
+0%{transform:scale(1);}
+100%{transform:scale(1.2);}
+}
+
+.scan{
+position:fixed;
 width:100%;
 height:100%;
 background:
 repeating-linear-gradient(
 to bottom,
-rgba(255,0,0,0.06),
-rgba(255,0,0,0.06) 1px,
-transparent 2px,
-transparent 4px
+rgba(255,0,0,0.05),
+rgba(255,0,0,0.05) 1px,
+transparent 3px,
+transparent 5px
 );
 pointer-events:none;
 z-index:-1;
-animation:scanMove 8s linear infinite;
 }
 
-@keyframes scanMove{
-0%{
-transform:translateY(0);
-}
-100%{
-transform:translateY(10px);
-}
-}
-
-/* 顶部 */
+/* 主页 */
 
 header{
-padding-top:80px;
+padding-top:100px;
 text-align:center;
 }
 
 .logo{
-font-size:72px;
+font-size:80px;
 font-weight:bold;
 letter-spacing:8px;
 text-shadow:
-0 0 10px #fff,
-0 0 20px red;
+0 0 15px white,
+0 0 30px red;
 animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
 0%{
 text-shadow:
-0 0 10px #fff,
-0 0 20px red;
+0 0 15px white,
+0 0 25px red;
 }
 100%{
 text-shadow:
-0 0 20px #fff,
-0 0 40px red;
+0 0 25px white,
+0 0 45px red;
 }
 }
 
 .subtitle{
-margin-top:15px;
+margin-top:20px;
 font-size:18px;
 letter-spacing:6px;
-color:#aaa;
-overflow:hidden;
-white-space:nowrap;
-border-right:2px solid red;
-width:fit-content;
-margin-left:auto;
-margin-right:auto;
-animation:typing 5s steps(30,end) infinite,
-blink .8s infinite;
+color:#999;
 }
 
-@keyframes typing{
-0%{width:0}
-50%{width:340px}
-100%{width:340px}
-}
-
-@keyframes blink{
-50%{
-border-color:transparent;
-}
-}
-
-/* 广播 */
-
-.alert-box{
+.alert{
 width:90%;
-max-width:700px;
+max-width:800px;
 margin:50px auto 20px;
 padding:25px;
-border:1px solid rgba(255,0,0,0.5);
-background:rgba(50,0,0,0.3);
-color:#ff5555;
-font-size:22px;
-line-height:1.5;
-box-shadow:0 0 20px rgba(255,0,0,0.2);
-animation:alertPulse 2s infinite;
+border:1px solid red;
+background:rgba(255,0,0,.08);
+color:#ff6666;
+font-size:24px;
+animation:pulse 2s infinite;
 }
 
-@keyframes alertPulse{
-0%{
-box-shadow:0 0 10px rgba(255,0,0,0.2);
-}
-100%{
-box-shadow:0 0 30px rgba(255,0,0,0.6);
-}
+@keyframes pulse{
+0%{box-shadow:0 0 10px rgba(255,0,0,.2);}
+100%{box-shadow:0 0 25px rgba(255,0,0,.5);}
 }
 
 .broadcast{
 width:90%;
-max-width:700px;
+max-width:800px;
 margin:20px auto;
-padding:20px;
+padding:18px;
 background:black;
 border:1px solid #222;
-color:#ddd;
-font-size:20px;
 overflow:hidden;
 white-space:nowrap;
-position:relative;
 }
 
 .broadcast span{
 display:inline-block;
 padding-left:100%;
-animation:broadcastMove 12s linear infinite;
+animation:move 14s linear infinite;
+color:#ccc;
+font-size:18px;
 }
 
-@keyframes broadcastMove{
-0%{
-transform:translateX(0);
-}
-100%{
-transform:translateX(-100%);
-}
+@keyframes move{
+0%{transform:translateX(0);}
+100%{transform:translateX(-100%);}
 }
 
 /* 卡片 */
 
 .container{
 width:90%;
-max-width:700px;
-margin:30px auto 80px;
+max-width:900px;
+margin:40px auto 80px;
 display:flex;
 flex-direction:column;
 gap:30px;
 }
 
 .card{
-position:relative;
-background:rgba(0,0,0,0.85);
+display:block;
+text-decoration:none;
+background:rgba(0,0,0,.8);
 border:1px solid #222;
 padding:35px;
-text-decoration:none;
 color:white;
+transition:.3s;
+position:relative;
 overflow:hidden;
-transition:0.3s;
 }
 
 .card:hover{
 transform:translateY(-5px);
 border-color:red;
-box-shadow:0 0 25px rgba(255,0,0,0.3);
+box-shadow:0 0 25px rgba(255,0,0,.3);
 }
 
 .card::before{
@@ -226,87 +232,66 @@ left:-100%;
 width:100%;
 height:2px;
 background:red;
-animation:lineMove 4s linear infinite;
+animation:line 4s linear infinite;
 }
 
-@keyframes lineMove{
-0%{
-left:-100%;
-}
-100%{
-left:100%;
-}
+@keyframes line{
+0%{left:-100%;}
+100%{left:100%;}
 }
 
 .card h2{
-font-size:50px;
-margin-bottom:15px;
-text-shadow:0 0 10px rgba(255,255,255,0.2);
+font-size:40px;
+margin-bottom:12px;
 }
 
 .card p{
-font-size:20px;
-color:#999;
+font-size:18px;
+color:#aaa;
 line-height:1.6;
 }
 
 .card small{
 display:block;
-margin-top:20px;
-color:#550000;
+margin-top:18px;
+color:#660000;
 letter-spacing:3px;
 }
 
-/* 按钮 */
+/* 加入按钮 */
 
-.join-btn{
+.join{
 display:block;
 width:90%;
-max-width:700px;
-margin:40px auto 100px;
-text-align:center;
+max-width:900px;
+margin:0 auto 100px;
 padding:22px;
-font-size:24px;
-text-decoration:none;
-color:white;
+text-align:center;
 background:linear-gradient(90deg,#550000,#aa0000);
 border:1px solid red;
-transition:0.3s;
-box-shadow:0 0 20px rgba(255,0,0,0.3);
+color:white;
+font-size:24px;
+text-decoration:none;
+transition:.3s;
 }
 
-.join-btn:hover{
-transform:scale(1.03);
-box-shadow:0 0 35px rgba(255,0,0,0.6);
+.join:hover{
+transform:scale(1.02);
+box-shadow:0 0 30px rgba(255,0,0,.5);
 }
-
-/* 手机版 */
 
 @media(max-width:768px){
 
 .logo{
-font-size:58px;
-}
-
-.subtitle{
-font-size:14px;
-letter-spacing:4px;
+font-size:55px;
 }
 
 .card h2{
-font-size:32px;
+font-size:30px;
 }
 
-.card p{
-font-size:17px;
-}
-
-.alert-box{
+.alert{
 font-size:18px;
-}
-
-.broadcast{
-font-size:16px;
 }
 
 }
@@ -316,7 +301,23 @@ font-size:16px;
 
 <body>
 
-<div class="scanlines"></div>
+<div id="intro">
+
+<h1>SITE-84</h1>
+
+<p>INITIALIZING FOUNDATION NETWORK...</p>
+
+<div class="loading">
+<span></span>
+</div>
+
+<p style="margin-top:30px;color:#666;">
+ACCESS GRANTED
+</p>
+
+</div>
+
+<div class="scan"></div>
 
 <header>
 
@@ -325,18 +326,18 @@ SITE-84
 </div>
 
 <div class="subtitle">
-SECURE. CONTAIN. PROTECT.
+SECURE • CONTAIN • PROTECT
 </div>
 
 </header>
 
-<div class="alert-box">
+<div class="alert">
 SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
 </div>
 
 <div class="broadcast">
 <span>
-[ 站点广播 ] SITE-84 当前状态：稳定 ｜ MTF-EPSILON-11 待命 ｜ SCP 收容状态正常
+[ SITE-84 BROADCAST ] Internal Security Department online ｜ GOC activity detected ｜ MTF-Epsilon-11 ready ｜ SCP containment stable
 </span>
 </div>
 
@@ -344,34 +345,34 @@ SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
 
 <a class="card" href="departments.html">
 
-<h2>部门数据库</h2>
+<h2>Department Database</h2>
 
 <p>
-查看 Site-84 内部部门信息
+Internal Foundation departments and command structures.
 </p>
 
-<small>DATA STREAM ACTIVE</small>
+<small>DATABASE ONLINE</small>
 
 </a>
 
 <a class="card" href="events.html">
 
-<h2>站点活动</h2>
+<h2>Site Events</h2>
 
 <p>
-查看当前 SCP 收容行动与活动
+Current anomalous activities and containment operations.
 </p>
 
-<small>EVENT FEED ONLINE</small>
+<small>EVENT STREAM ACTIVE</small>
 
 </a>
 
 <a class="card" href="mtf.html">
 
-<h2>MTF 部队</h2>
+<h2>MTF Units</h2>
 
 <p>
-机动特遣队资料与部署状态
+Mobile Task Force deployment and operational status.
 </p>
 
 <small>TASK FORCE READY</small>
@@ -380,10 +381,10 @@ SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
 
 <a class="card" href="status.html">
 
-<h2>服务器状态</h2>
+<h2>System Status</h2>
 
 <p>
-查看 SITE-84 当前运行状态
+Current SITE-84 network and server condition.
 </p>
 
 <small>SYSTEM ONLINE</small>
@@ -392,11 +393,11 @@ SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
 
 </div>
 
-<a class="join-btn"
+<a class="join"
 href="https://qm.qq.com/q/iIPAlLJQ7m"
 target="_blank">
 
-加入 SITE-84
+JOIN SITE-84
 
 </a>
 

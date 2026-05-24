@@ -1,50 +1,114 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>活动</title>
+<title>Site Events</title>
 
 <style>
 
 body{
-background:#000;
+background:#050505;
 color:white;
 font-family:Arial;
-padding:40px 20px;
+margin:0;
+overflow-x:hidden;
 }
 
-.container{
-max-width:760px;
+body::before{
+content:"";
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle,
+rgba(255,0,0,.08),
+transparent 70%);
+animation:bg 6s infinite alternate;
+z-index:-1;
+}
+
+@keyframes bg{
+0%{transform:scale(1);}
+100%{transform:scale(1.1);}
+}
+
+header{
+text-align:center;
+padding:60px 20px;
+}
+
+h1{
+font-size:55px;
+text-shadow:0 0 20px red;
+}
+
+.sub{
+color:#888;
+letter-spacing:4px;
+}
+
+.timeline{
+width:90%;
+max-width:900px;
 margin:auto;
-}
-
-.title{
-font-size:36px;
-margin-bottom:40px;
+padding-bottom:80px;
 }
 
 .event{
-border:1px solid #222;
-padding:20px;
-margin-bottom:16px;
+position:relative;
+margin-bottom:35px;
+padding:25px 30px;
+border-left:3px solid red;
+background:rgba(255,0,0,.05);
+transition:.3s;
 }
 
-.name{
+.event:hover{
+transform:translateX(8px);
+box-shadow:0 0 20px rgba(255,0,0,.25);
+}
+
+.time{
+color:#ff4444;
 font-size:18px;
-margin-bottom:8px;
+margin-bottom:10px;
+}
+
+.title{
+font-size:32px;
+margin-bottom:12px;
 }
 
 .desc{
-color:#666;
-font-size:14px;
+color:#aaa;
+line-height:1.7;
+font-size:18px;
+}
+
+.level{
+margin-top:15px;
+color:#660000;
+letter-spacing:3px;
+font-size:13px;
 }
 
 .back{
-display:inline-block;
-margin-top:30px;
-color:#777;
+display:block;
+width:220px;
+margin:40px auto;
+padding:18px;
+text-align:center;
+background:#550000;
+border:1px solid red;
+color:white;
 text-decoration:none;
+transition:.3s;
+}
+
+.back:hover{
+transform:scale(1.03);
+box-shadow:0 0 25px rgba(255,0,0,.4);
 }
 
 </style>
@@ -52,44 +116,103 @@ text-decoration:none;
 
 <body>
 
-<div class="container">
+<header>
+
+<h1>Site Events</h1>
+
+<div class="sub">
+SITE-84 EVENT FEED
+</div>
+
+</header>
+
+<div class="timeline">
+
+<div class="event">
+
+<div class="time">
+05:32
+</div>
 
 <div class="title">
-活动
+Containment Instability Detected
+</div>
+
+<div class="desc">
+Low-level anomalous fluctuations detected inside Sector-C containment zone.
+</div>
+
+<div class="level">
+THREAT LEVEL : LOW
+</div>
+
 </div>
 
 <div class="event">
-<div class="name">
-站点封锁演习
+
+<div class="time">
+06:10
 </div>
+
+<div class="title">
+MTF-Epsilon-11 Deployment
+</div>
+
 <div class="desc">
-模拟 SCP 收容失效事件
+Mobile Task Force entered underground access tunnels for investigation.
 </div>
+
+<div class="level">
+RESPONSE STATUS : ACTIVE
+</div>
+
 </div>
 
 <div class="event">
-<div class="name">
-MTF 联合行动
+
+<div class="time">
+08:45
 </div>
+
+<div class="title">
+GOC External Transmission
+</div>
+
 <div class="desc">
-多支特遣队联合行动训练
+Encrypted communication received from Global Occult Coalition.
 </div>
+
+<div class="level">
+CLEARANCE LEVEL : 4
+</div>
+
 </div>
 
 <div class="event">
-<div class="name">
-异常收容行动
+
+<div class="time">
+10:02
 </div>
+
+<div class="title">
+Internal Security Sweep
+</div>
+
 <div class="desc">
-收容高危险异常实体
+Internal Security Department completed personnel verification scan.
 </div>
+
+<div class="level">
+STATUS : COMPLETE
+</div>
+
+</div>
+
 </div>
 
 <a class="back" href="index.html">
-← 返回主页
+RETURN
 </a>
-
-</div>
 
 </body>
 </html>

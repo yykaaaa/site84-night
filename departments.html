@@ -1,70 +1,78 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>部门数据库</title>
+<title>Department Database</title>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+body{
+background:black;
+color:white;
+font-family:Arial;
+margin:0;
 }
 
-body{
-    background:#000;
-    color:#fff;
-    font-family:Arial,sans-serif;
-    padding:40px 20px;
+header{
+text-align:center;
+padding:60px 20px;
+}
+
+h1{
+font-size:55px;
+text-shadow:0 0 20px red;
+}
+
+.sub{
+color:#888;
+letter-spacing:5px;
 }
 
 .container{
-    max-width:760px;
-    margin:auto;
+width:90%;
+max-width:900px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:25px;
+padding-bottom:80px;
 }
 
-.title{
-    font-size:34px;
-    margin-bottom:40px;
-    letter-spacing:2px;
+.card{
+background:#0a0a0a;
+border:1px solid #222;
+padding:30px;
+transition:.3s;
 }
 
-.dept{
-    border:1px solid #222;
-    padding:22px;
-    margin-bottom:16px;
+.card:hover{
+border-color:red;
+transform:translateY(-5px);
+box-shadow:0 0 25px rgba(255,0,0,.3);
 }
 
-.dept-name{
-    font-size:18px;
-    margin-bottom:8px;
+.card h2{
+font-size:34px;
+margin-bottom:12px;
 }
 
-.dept-desc{
-    color:#666;
-    font-size:14px;
-}
-
-.goc{
-    color:#60a5fa;
-}
-
-.section{
-    margin-top:45px;
-    margin-bottom:20px;
-    color:#777;
-    font-size:14px;
-    letter-spacing:2px;
+.card p{
+color:#aaa;
+font-size:18px;
+line-height:1.6;
 }
 
 .back{
-    display:inline-block;
-    margin-top:30px;
-    color:#888;
-    text-decoration:none;
+display:block;
+width:220px;
+margin:40px auto;
+padding:18px;
+text-align:center;
+background:#550000;
+border:1px solid red;
+color:white;
+text-decoration:none;
 }
 
 </style>
@@ -72,120 +80,58 @@ body{
 
 <body>
 
+<header>
+
+<h1>Department Database</h1>
+
+<div class="sub">
+FOUNDATION INTERNAL SYSTEM
+</div>
+
+</header>
+
 <div class="container">
 
-<div class="title">
-部门数据库
+<div class="card">
+<h2>Research Department</h2>
+<p>
+Responsible for SCP research and anomalous analysis.
+</p>
 </div>
 
-<div class="dept">
-<div class="dept-name" style="color:#ef4444;">
-安保部门 Security Department
-</div>
-<div class="dept-desc">
-负责站点安全与武装防御
-</div>
+<div class="card">
+<h2>Internal Security Department</h2>
+<p>
+Maintains internal order, surveillance and personnel security.
+</p>
 </div>
 
-<div class="dept">
-<div class="dept-name" style="color:#f97316;">
-内部安全部门 Internal Security Department
-</div>
-<div class="dept-desc">
-负责内部监察与权限审查
-</div>
+<div class="card">
+<h2>Medical Department</h2>
+<p>
+Handles treatment, biological hazards and mental recovery.
+</p>
 </div>
 
-<div class="dept">
-<div class="dept-name" style="color:#22c55e;">
-研究部门 Research Department
-</div>
-<div class="dept-desc">
-负责 SCP 项目研究
-</div>
+<div class="card">
+<h2>Logistics Department</h2>
+<p>
+Manages transport, supplies and maintenance systems.
+</p>
 </div>
 
-<div class="dept">
-<div class="dept-name" style="color:#a855f7;">
-医疗部门 Medical Department
-</div>
-<div class="dept-desc">
-负责医疗与异常治疗
-</div>
+<div class="card">
+<h2>Global Occult Coalition (GOC)</h2>
+<p>
+External allied anomalous combat organization activity records.
+</p>
 </div>
 
-<div class="dept">
-<div class="dept-name" style="color:#eab308;">
-情报部门 Intelligence Agency
-</div>
-<div class="dept-desc">
-负责情报调查与信息处理
-</div>
-</div>
-
-<div class="dept">
-<div class="dept-name goc">
-全球超自然联盟 GOC
-</div>
-<div class="dept-desc">
-负责超自然武装行动
-</div>
-</div>
-
-<div class="section">
-MTF 机动特遣队
-</div>
-
-<div class="dept">
-<div class="dept-name">
-MTF Alpha-1 “Red Right Hand”
-</div>
-<div class="dept-desc">
-直属 O5 指挥部
-</div>
-</div>
-
-<div class="dept">
-<div class="dept-name">
-MTF Epsilon-11 “Nine-Tailed Fox”
-</div>
-<div class="dept-desc">
-处理站点失控事件
-</div>
-</div>
-
-<div class="dept">
-<div class="dept-name">
-MTF Nu-7 “Hammer Down”
-</div>
-<div class="dept-desc">
-大型武装异常处理
-</div>
-</div>
-
-<div class="dept">
-<div class="dept-name">
-MTF Tau-5 “Samsara”
-</div>
-<div class="dept-desc">
-高机密特遣队
-</div>
-</div>
-
-<div class="dept">
-<div class="dept-name">
-MTF Zeta-9 “Mole Rats”
-</div>
-<div class="dept-desc">
-地下设施行动
-</div>
 </div>
 
 <a class="back" href="index.html">
-← 返回主页
+RETURN
 </a>
-
-</div>
 
 </body>
 </html>

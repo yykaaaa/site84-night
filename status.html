@@ -1,50 +1,259 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>服务器状态</title>
+<title>SITE-84 Server Status</title>
 
 <style>
 
-body{
-background:#000;
-color:white;
-font-family:Arial;
-padding:40px 20px;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
+
+body{
+background:#050505;
+color:white;
+font-family:Arial,Helvetica,sans-serif;
+overflow-x:hidden;
+}
+
+/* 动态背景 */
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle,
+rgba(255,0,0,.08),
+transparent 70%);
+animation:bg 7s infinite alternate;
+z-index:-2;
+}
+
+@keyframes bg{
+0%{
+transform:scale(1);
+}
+100%{
+transform:scale(1.15);
+}
+}
+
+/* 扫描线 */
+
+.scan{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,0,0,.04),
+rgba(255,0,0,.04) 1px,
+transparent 3px,
+transparent 5px
+);
+pointer-events:none;
+z-index:-1;
+}
+
+/* 标题 */
+
+header{
+text-align:center;
+padding:70px 20px;
+}
+
+h1{
+font-size:60px;
+letter-spacing:6px;
+text-shadow:
+0 0 15px red,
+0 0 30px red;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+0%{
+text-shadow:
+0 0 10px red,
+0 0 20px red;
+}
+100%{
+text-shadow:
+0 0 20px red,
+0 0 40px red;
+}
+}
+
+.sub{
+margin-top:15px;
+color:#888;
+letter-spacing:5px;
+font-size:18px;
+}
+
+/* 面板 */
 
 .container{
-max-width:760px;
+width:90%;
+max-width:900px;
 margin:auto;
+display:flex;
+flex-direction:column;
+gap:28px;
+padding-bottom:80px;
 }
 
-.title{
-font-size:36px;
-margin-bottom:40px;
-}
-
-.status{
+.panel{
+background:rgba(0,0,0,.82);
 border:1px solid #222;
-padding:24px;
+padding:35px;
+position:relative;
+overflow:hidden;
+transition:.3s;
 }
 
-.online{
-color:#22c55e;
-font-size:20px;
-margin-bottom:10px;
+.panel:hover{
+transform:translateY(-5px);
+border-color:red;
+box-shadow:0 0 25px rgba(255,0,0,.3);
+}
+
+.panel::before{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:2px;
+background:red;
+animation:line 4s linear infinite;
+}
+
+@keyframes line{
+0%{
+left:-100%;
+}
+100%{
+left:100%;
+}
+}
+
+.label{
+display:flex;
+align-items:center;
+font-size:24px;
+margin-bottom:18px;
+}
+
+/* 状态点 */
+
+.dot{
+width:14px;
+height:14px;
+background:#00ff66;
+border-radius:50%;
+margin-right:14px;
+animation:pulse 1s infinite alternate;
+box-shadow:0 0 12px #00ff66;
+}
+
+@keyframes pulse{
+0%{
+opacity:.4;
+transform:scale(.9);
+}
+100%{
+opacity:1;
+transform:scale(1.15);
+}
+}
+
+.value{
+font-size:46px;
+color:#ff4444;
+margin-bottom:15px;
+text-shadow:0 0 10px rgba(255,0,0,.4);
 }
 
 .info{
-color:#777;
-margin-bottom:8px;
+color:#999;
+font-size:18px;
+line-height:1.7;
 }
 
+/* 在线人数 */
+
+.players{
+margin-top:18px;
+font-size:22px;
+color:white;
+}
+
+.players span{
+color:#ff4444;
+font-weight:bold;
+}
+
+/* 返回 */
+
 .back{
-display:inline-block;
-margin-top:30px;
-color:#777;
+display:block;
+width:240px;
+margin:50px auto;
+padding:18px;
+text-align:center;
+background:linear-gradient(
+90deg,
+#550000,
+#990000
+);
+border:1px solid red;
+color:white;
 text-decoration:none;
+font-size:20px;
+transition:.3s;
+}
+
+.back:hover{
+transform:scale(1.03);
+box-shadow:0 0 25px rgba(255,0,0,.4);
+}
+
+/* 手机版 */
+
+@media(max-width:768px){
+
+h1{
+font-size:42px;
+}
+
+.value{
+font-size:34px;
+}
+
+.label{
+font-size:20px;
+}
+
+.info{
+font-size:16px;
+}
+
+.players{
+font-size:18px;
+}
+
 }
 
 </style>
@@ -52,37 +261,169 @@ text-decoration:none;
 
 <body>
 
-<div class="container">
+<div class="scan"></div>
 
-<div class="title">
-服务器状态
+<header>
+
+<h1>SITE-84 STATUS</h1>
+
+<div class="sub">
+SCP:RP SERVER MONITOR
 </div>
 
-<div class="status">
+</header>
 
-<div class="online">
+<div class="container">
+
+<!-- 主服务器 -->
+
+<div class="panel">
+
+<div class="label">
+<div class="dot"></div>
+SITE-84 RP-01
+</div>
+
+<div class="value">
 ONLINE
 </div>
 
 <div class="info">
-服务器：SITE-84
+Primary SCP:RP operational server running normally.
+</div>
+
+<div class="players">
+Players Online :
+<span id="players">
+24
+</span>
+/40
+</div>
+
+</div>
+
+<!-- 收容状态 -->
+
+<div class="panel">
+
+<div class="label">
+<div class="dot"></div>
+Containment Status
+</div>
+
+<div class="value">
+STABLE
 </div>
 
 <div class="info">
-状态：正常运行
+No critical containment failures currently detected.
+</div>
+
+</div>
+
+<!-- DEFCON -->
+
+<div class="panel">
+
+<div class="label">
+<div class="dot"></div>
+Threat Condition
+</div>
+
+<div class="value" id="defcon">
+GREEN
 </div>
 
 <div class="info">
-游戏：SCP:RP
+Foundation global response condition remains normal.
+</div>
+
+</div>
+
+<!-- 当前事件 -->
+
+<div class="panel">
+
+<div class="label">
+<div class="dot"></div>
+Active Event
+</div>
+
+<div class="value" id="event">
+NONE
+</div>
+
+<div class="info">
+No active anomalous incidents detected.
+</div>
+
 </div>
 
 </div>
 
 <a class="back" href="index.html">
-← 返回主页
+RETURN TO SITE-84
 </a>
 
-</div>
+<script>
+
+/* 假在线人数 */
+
+setInterval(()=>{
+
+let players=
+Math.floor(Math.random()*16)+20;
+
+document.getElementById("players")
+.innerText=players;
+
+},4000);
+
+/* DEFCON */
+
+const defcons=[
+"GREEN",
+"YELLOW",
+"RED"
+];
+
+setInterval(()=>{
+
+let random=
+Math.floor(Math.random()*defcons.length);
+
+document.getElementById("defcon")
+.innerText=defcons[random];
+
+},7000);
+
+/* 事件 */
+
+const events=[
+
+"NONE",
+
+"CONTAINMENT BREACH",
+
+"HCZ LOCKDOWN",
+
+"096 ACTIVITY",
+
+"MTF DEPLOYMENT"
+
+];
+
+setInterval(()=>{
+
+let random=
+Math.floor(Math.random()*events.length);
+
+document.getElementById("event")
+.innerText=events[random];
+
+},6000);
+
+</script>
 
 </body>
 </html>
