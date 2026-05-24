@@ -2,6 +2,7 @@
 <html lang="zh-CN">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,6 +22,39 @@ color:white;
 font-family:Arial,sans-serif;
 overflow-x:hidden;
 animation:fadeIn 1.2s ease;
+position:relative;
+min-height:100vh;
+}
+
+/* 动态背景 */
+
+body::before{
+content:"";
+position:fixed;
+top:-20%;
+left:-20%;
+width:140%;
+height:140%;
+
+background:
+
+radial-gradient(
+circle at center,
+rgba(120,0,0,0.10),
+transparent 60%
+),
+
+radial-gradient(
+circle at 30% 70%,
+rgba(255,255,255,0.03),
+transparent 55%
+);
+
+animation:bgMove 12s ease-in-out infinite alternate;
+
+z-index:0;
+pointer-events:none;
+filter:blur(40px);
 }
 
 /* 扫描线 */
@@ -33,6 +67,7 @@ left:0;
 width:100%;
 height:100%;
 pointer-events:none;
+
 background:
 repeating-linear-gradient(
 to bottom,
@@ -41,7 +76,10 @@ rgba(255,255,255,0.02) 1px,
 transparent 1px,
 transparent 3px
 );
+
 opacity:0.15;
+
+z-index:1;
 }
 
 /* 页面 */
@@ -54,7 +92,7 @@ position:relative;
 z-index:2;
 }
 
-/* logo */
+/* SCP logo */
 
 .logo{
 width:110px;
@@ -63,6 +101,11 @@ margin:auto;
 margin-bottom:25px;
 filter:invert(1);
 opacity:0.95;
+transition:0.4s;
+}
+
+.logo:hover{
+transform:scale(1.03);
 }
 
 /* 标题 */
@@ -89,6 +132,7 @@ border-right:2px solid #666;
 width:0;
 margin-left:auto;
 margin-right:auto;
+
 animation:
 typing 4s steps(30,end) forwards,
 blink .8s infinite;
@@ -107,7 +151,7 @@ letter-spacing:1px;
 animation:alertBlink 3s infinite;
 }
 
-/* warning */
+/* 广播 */
 
 .warning{
 border:1px solid #1b1b1b;
@@ -116,11 +160,6 @@ padding:15px;
 margin-bottom:30px;
 color:#888;
 font-size:13px;
-}
-
-/* 广播系统 */
-
-#broadcast{
 transition:0.4s;
 }
 
@@ -130,11 +169,15 @@ transition:0.4s;
 display:block;
 text-decoration:none;
 color:white;
+
 border:1px solid #1c1c1c;
 background:#050505;
+
 padding:24px;
 margin-bottom:18px;
+
 transition:0.25s;
+
 position:relative;
 overflow:hidden;
 }
@@ -147,7 +190,7 @@ border-color:#444;
 background:#090909;
 }
 
-/* 左边线 */
+/* 左侧线 */
 
 .card::before{
 content:"";
@@ -156,7 +199,7 @@ left:0;
 top:0;
 width:2px;
 height:100%;
-background:#444;
+background:#666;
 opacity:0;
 transition:0.3s;
 }
@@ -189,36 +232,58 @@ font-size:12px;
 letter-spacing:2px;
 }
 
+/* 背景移动 */
+
+@keyframes bgMove{
+
+0%{
+transform:translate(0px,0px) scale(1);
+}
+
+100%{
+transform:translate(-30px,-20px) scale(1.05);
+}
+
+}
+
 /* 页面淡入 */
 
 @keyframes fadeIn{
+
 from{
 opacity:0;
 transform:translateY(8px);
 }
+
 to{
 opacity:1;
 transform:translateY(0);
 }
+
 }
 
 /* 打字机 */
 
 @keyframes typing{
+
 from{
 width:0;
 }
+
 to{
 width:280px;
 }
+
 }
 
 /* 光标 */
 
 @keyframes blink{
+
 50%{
 border-color:transparent;
 }
+
 }
 
 /* 警报闪烁 */
