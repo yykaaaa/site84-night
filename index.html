@@ -20,7 +20,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* 入场 */
+/* 入场动画 */
 
 #intro{
 position:fixed;
@@ -34,8 +34,8 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 z-index:9999;
-animation:fadeOut 1s forwards;
-animation-delay:4s;
+animation:fadeOut .8s forwards;
+animation-delay:1.8s;
 }
 
 #intro h1{
@@ -64,12 +64,16 @@ display:block;
 width:0%;
 height:100%;
 background:red;
-animation:load 4s linear forwards;
+animation:load 1.8s linear forwards;
 }
 
 @keyframes load{
-0%{width:0;}
-100%{width:100%;}
+0%{
+width:0;
+}
+100%{
+width:100%;
+}
 }
 
 @keyframes fadeOut{
@@ -95,8 +99,12 @@ z-index:-2;
 }
 
 @keyframes bg{
-0%{transform:scale(1);}
-100%{transform:scale(1.15);}
+0%{
+transform:scale(1);
+}
+100%{
+transform:scale(1.15);
+}
 }
 
 /* 扫描线 */
@@ -246,8 +254,12 @@ animation:line 4s linear infinite;
 }
 
 @keyframes line{
-0%{left:-100%;}
-100%{left:100%;}
+0%{
+left:-100%;
+}
+100%{
+left:100%;
+}
 }
 
 .card h2{
@@ -306,12 +318,18 @@ font-size:30px;
 font-size:18px;
 }
 
+#intro h1{
+font-size:50px;
+}
+
 }
 
 </style>
 </head>
 
 <body>
+
+<!-- 入场 -->
 
 <div id="intro">
 
@@ -329,7 +347,11 @@ ACCESS GRANTED
 
 </div>
 
+<!-- 扫描线 -->
+
 <div class="scan"></div>
+
+<!-- 主标题 -->
 
 <header>
 
@@ -343,15 +365,21 @@ SECURE • CONTAIN • PROTECT
 
 </header>
 
+<!-- 警报 -->
+
 <div class="alert">
 NIGHT 系统已上线 ｜ SCP:RP 收容状态稳定
 </div>
+
+<!-- 广播 -->
 
 <div class="broadcast">
 <span>
 [ NIGHT 广播 ] Internal Security Department online ｜ GOC activity detected ｜ MTF-E11 ready ｜ 收容系统稳定
 </span>
 </div>
+
+<!-- 主板块 -->
 
 <div class="container">
 
@@ -404,6 +432,8 @@ Night SCP:RP 服务器运行状态
 </a>
 
 </div>
+
+<!-- 加入 -->
 
 <a class="join"
 href="https://qm.qq.com/q/iIPAlLJQ7m"
