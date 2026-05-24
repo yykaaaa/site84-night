@@ -9,73 +9,193 @@
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
 body{
-background:black;
+background:#000;
 color:white;
 font-family:Arial,sans-serif;
-padding:40px 20px;
+overflow-x:hidden;
+animation:fadeIn 1.2s ease;
 }
+
+/* 扫描线 */
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,0.02),
+rgba(255,255,255,0.02) 1px,
+transparent 1px,
+transparent 3px
+);
+opacity:0.15;
+}
+
+/* 页面 */
 
 .container{
-max-width:700px;
+max-width:760px;
 margin:auto;
+padding:50px 20px;
+position:relative;
+z-index:2;
 }
 
+/* logo */
+
 .logo{
-width:100px;
+width:110px;
 display:block;
 margin:auto;
-margin-bottom:20px;
+margin-bottom:25px;
 filter:invert(1);
+opacity:0.95;
 }
+
+/* 标题 */
 
 .title{
 text-align:center;
 font-size:42px;
-letter-spacing:4px;
-margin-bottom:10px;
+letter-spacing:5px;
+margin-bottom:14px;
+font-weight:bold;
 }
 
-.sub{
+/* 打字机 */
+
+.typing{
 text-align:center;
-color:#666;
-margin-bottom:40px;
+color:#888;
+margin-bottom:45px;
+font-size:14px;
+letter-spacing:2px;
+overflow:hidden;
+white-space:nowrap;
+border-right:2px solid #666;
+width:0;
+margin-left:auto;
+margin-right:auto;
+animation:
+typing 4s steps(30,end) forwards,
+blink .8s infinite;
 }
+
+/* warning */
 
 .warning{
-border:1px solid #222;
-padding:14px;
-margin-bottom:25px;
-color:#777;
+border:1px solid #1b1b1b;
+background:#050505;
+padding:15px;
+margin-bottom:30px;
+color:#888;
+font-size:13px;
 }
+
+/* 卡片 */
 
 .card{
 display:block;
 text-decoration:none;
 color:white;
-border:1px solid #222;
-padding:22px;
-margin-bottom:16px;
+border:1px solid #1c1c1c;
+background:#050505;
+padding:24px;
+margin-bottom:18px;
+transition:0.25s;
+position:relative;
+overflow:hidden;
 }
+
+/* hover */
 
 .card:hover{
-background:#080808;
+transform:translateY(-2px);
+border-color:#444;
+background:#090909;
 }
+
+/* 左边线 */
+
+.card::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:2px;
+height:100%;
+background:#444;
+opacity:0;
+transition:0.3s;
+}
+
+.card:hover::before{
+opacity:1;
+}
+
+/* 标题 */
 
 .card h2{
-margin:0 0 8px 0;
+margin-bottom:8px;
+font-size:20px;
 }
 
+/* 描述 */
+
 .card p{
-color:#666;
-margin:0;
+color:#777;
+font-size:14px;
 }
+
+/* footer */
 
 .footer{
 margin-top:50px;
 text-align:center;
-color:#444;
+color:#333;
 font-size:12px;
+letter-spacing:2px;
+}
+
+/* 动画 */
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(8px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes typing{
+from{
+width:0;
+}
+to{
+width:280px;
+}
+}
+
+@keyframes blink{
+50%{
+border-color:transparent;
+}
 }
 
 </style>
@@ -95,27 +215,27 @@ src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/SCP_Foundation_%2
 SITE-84
 </div>
 
-<div class="sub">
-NIGHT 内部数据库
+<div class="typing">
+SECURE. CONTAIN. PROTECT.
 </div>
 
 <div class="warning">
-WARNING：未授权访问将被记录
+[ SITE NOTICE ] 未授权访问将被记录并上报站点安保系统
 </div>
 
 <a class="card" href="departments.html">
-<h2>部门</h2>
-<p>查看 Site-84 部门数据库</p>
+<h2>部门数据库</h2>
+<p>查看 Site-84 内部部门信息</p>
 </a>
 
 <a class="card" href="events.html">
-<h2>活动</h2>
-<p>查看当前站点活动</p>
+<h2>站点活动</h2>
+<p>查看当前 SCP 收容行动与活动</p>
 </a>
 
 <a class="card" href="status.html">
 <h2>服务器状态</h2>
-<p>查看 SCP:RP 服务器状态</p>
+<p>查看 SCP:RP 服务器运行状态</p>
 </a>
 
 <a
@@ -123,12 +243,12 @@ class="card"
 href="https://qm.qq.com/q/AP811As4fe"
 target="_blank"
 >
-<h2>点击加入</h2>
-<p>加入 SITE-84 官方群聊</p>
+<h2>加入站点</h2>
+<p>进入 SITE-84 官方通讯频道</p>
 </a>
 
 <div class="footer">
-SITE-84 INTERNAL NETWORK
+SITE-84 INTERNAL TERMINAL
 </div>
 
 </div>
