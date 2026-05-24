@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NIGHT</title>
+<title>SITE-84</title>
 
 <style>
 
@@ -30,57 +30,85 @@ width:100%;
 height:100%;
 background:black;
 display:flex;
-flex-direction:column;
 justify-content:center;
 align-items:center;
+flex-direction:column;
 z-index:9999;
-animation:fadeOut .8s forwards;
-animation-delay:1.8s;
+animation:introFade .8s forwards;
+animation-delay:2.5s;
 }
 
-#intro h1{
-font-size:70px;
-letter-spacing:10px;
+.intro-logo{
+font-size:85px;
+letter-spacing:12px;
 color:red;
-text-shadow:0 0 20px red;
+text-shadow:
+0 0 10px red,
+0 0 30px red,
+0 0 50px red;
+position:relative;
+animation:glitch 1.2s infinite;
 }
 
-#intro p{
-margin-top:20px;
+.intro-sub{
+margin-top:25px;
 color:#888;
-letter-spacing:5px;
+letter-spacing:6px;
+font-size:16px;
+animation:flicker 1s infinite;
 }
 
-.loading{
-width:260px;
-height:2px;
-background:#222;
-margin-top:30px;
-overflow:hidden;
-}
+@keyframes glitch{
 
-.loading span{
-display:block;
-width:0%;
-height:100%;
-background:red;
-animation:load 1.8s linear forwards;
-}
-
-@keyframes load{
 0%{
-width:0;
-}
-100%{
-width:100%;
-}
+transform:translate(0);
 }
 
-@keyframes fadeOut{
+20%{
+transform:translate(-2px,2px);
+}
+
+40%{
+transform:translate(2px,-2px);
+}
+
+60%{
+transform:translate(-1px,1px);
+}
+
+80%{
+transform:translate(1px,-1px);
+}
+
+100%{
+transform:translate(0);
+}
+
+}
+
+@keyframes flicker{
+
+0%{
+opacity:1;
+}
+
+50%{
+opacity:.4;
+}
+
+100%{
+opacity:1;
+}
+
+}
+
+@keyframes introFade{
+
 to{
 opacity:0;
 visibility:hidden;
 }
+
 }
 
 /* 动态背景 */
@@ -88,29 +116,36 @@ visibility:hidden;
 body::before{
 content:"";
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background:
 radial-gradient(circle,
-rgba(255,0,0,.1),
+rgba(255,0,0,.08),
 transparent 70%);
 animation:bg 6s infinite alternate;
 z-index:-2;
 }
 
 @keyframes bg{
+
 0%{
 transform:scale(1);
 }
+
 100%{
 transform:scale(1.15);
 }
+
 }
 
 /* 扫描线 */
 
 .scan{
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background:
@@ -125,37 +160,44 @@ pointer-events:none;
 z-index:-1;
 }
 
+/* LOGO */
+
+.logo-img{
+width:260px;
+max-width:75%;
+margin:auto;
+display:block;
+filter:
+drop-shadow(0 0 10px rgba(255,255,255,.2))
+drop-shadow(0 0 25px rgba(255,0,0,.2));
+animation:logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
 /* 标题 */
 
 header{
-padding-top:100px;
+padding-top:90px;
 text-align:center;
 }
 
-.logo{
-font-size:90px;
-letter-spacing:10px;
-text-shadow:
-0 0 15px red,
-0 0 35px red;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-0%{
-text-shadow:
-0 0 15px red,
-0 0 25px red;
-}
-100%{
-text-shadow:
-0 0 25px red,
-0 0 45px red;
-}
-}
-
 .subtitle{
-margin-top:20px;
+margin-top:25px;
 font-size:18px;
 color:#888;
 letter-spacing:6px;
@@ -176,12 +218,15 @@ animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
+
 0%{
 box-shadow:0 0 10px rgba(255,0,0,.2);
 }
+
 100%{
 box-shadow:0 0 30px rgba(255,0,0,.4);
 }
+
 }
 
 /* 广播 */
@@ -205,12 +250,15 @@ color:#ccc;
 }
 
 @keyframes move{
+
 0%{
 transform:translateX(0);
 }
+
 100%{
 transform:translateX(-100%);
 }
+
 }
 
 /* 卡片 */
@@ -254,12 +302,15 @@ animation:line 4s linear infinite;
 }
 
 @keyframes line{
+
 0%{
 left:-100%;
 }
+
 100%{
 left:100%;
 }
+
 }
 
 .card h2{
@@ -306,10 +357,6 @@ box-shadow:0 0 30px rgba(255,0,0,.5);
 
 @media(max-width:768px){
 
-.logo{
-font-size:55px;
-}
-
 .card h2{
 font-size:30px;
 }
@@ -318,8 +365,12 @@ font-size:30px;
 font-size:18px;
 }
 
-#intro h1{
-font-size:50px;
+.intro-logo{
+font-size:55px;
+}
+
+.logo-img{
+width:200px;
 }
 
 }
@@ -333,17 +384,13 @@ font-size:50px;
 
 <div id="intro">
 
-<h1>NIGHT</h1>
-
-<p>INITIALIZING FOUNDATION NETWORK...</p>
-
-<div class="loading">
-<span></span>
+<div class="intro-logo">
+SITE-84
 </div>
 
-<p style="margin-top:25px;color:#666;">
-ACCESS GRANTED
-</p>
+<div class="intro-sub">
+FOUNDATION NETWORK ACCESS
+</div>
 
 </div>
 
@@ -355,9 +402,7 @@ ACCESS GRANTED
 
 <header>
 
-<div class="logo">
-NIGHT
-</div>
+<img src="logo.png" class="logo-img">
 
 <div class="subtitle">
 SECURE • CONTAIN • PROTECT
@@ -368,14 +413,14 @@ SECURE • CONTAIN • PROTECT
 <!-- 警报 -->
 
 <div class="alert">
-NIGHT 系统已上线 ｜ SCP:RP 收容状态稳定
+SITE-84 系统已上线 ｜ SCP:RP 收容状态稳定
 </div>
 
 <!-- 广播 -->
 
 <div class="broadcast">
 <span>
-[ NIGHT 广播 ] Internal Security Department online ｜ GOC activity detected ｜ MTF-E11 ready ｜ 收容系统稳定
+[ SITE-84 广播 ] Internal Security Department online ｜ GOC activity detected ｜ MTF-E11 ready ｜ 收容系统稳定
 </span>
 </div>
 
@@ -388,7 +433,7 @@ NIGHT 系统已上线 ｜ SCP:RP 收容状态稳定
 <h2>部门数据库</h2>
 
 <p>
-查看 NIGHT 内部部门与组织结构
+查看 SITE-84 内部部门与组织结构
 </p>
 
 <small>DATABASE ONLINE</small>
@@ -424,7 +469,7 @@ NIGHT 系统已上线 ｜ SCP:RP 收容状态稳定
 <h2>服务器状态</h2>
 
 <p>
-Night SCP:RP 服务器运行状态
+SITE-84 SCP:RP 服务器运行状态
 </p>
 
 <small>SYSTEM ONLINE</small>
@@ -439,7 +484,7 @@ Night SCP:RP 服务器运行状态
 href="https://qm.qq.com/q/iIPAlLJQ7m"
 target="_blank">
 
-加入 NIGHT
+加入 SITE-84
 
 </a>
 
