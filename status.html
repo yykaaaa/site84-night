@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SITE-84 Server Status</title>
+
+<title>NIGHT - 服务器状态</title>
 
 <style>
 
@@ -75,7 +76,7 @@ padding:70px 20px;
 
 h1{
 font-size:60px;
-letter-spacing:6px;
+letter-spacing:8px;
 text-shadow:
 0 0 15px red,
 0 0 30px red;
@@ -265,10 +266,10 @@ font-size:18px;
 
 <header>
 
-<h1>SITE-84 STATUS</h1>
+<h1>NIGHT</h1>
 
 <div class="sub">
-SCP:RP SERVER MONITOR
+Night 服务器状态监控系统
 </div>
 
 </header>
@@ -281,7 +282,7 @@ SCP:RP SERVER MONITOR
 
 <div class="label">
 <div class="dot"></div>
-SITE-84 RP-01
+Night RP-01
 </div>
 
 <div class="value">
@@ -289,11 +290,11 @@ ONLINE
 </div>
 
 <div class="info">
-Primary SCP:RP operational server running normally.
+Night 主服务器运行正常
 </div>
 
 <div class="players">
-Players Online :
+在线人数 :
 <span id="players">
 24
 </span>
@@ -308,34 +309,34 @@ Players Online :
 
 <div class="label">
 <div class="dot"></div>
-Containment Status
+收容状态
 </div>
 
 <div class="value">
-STABLE
+稳定
 </div>
 
 <div class="info">
-No critical containment failures currently detected.
+当前未检测到严重收容失效事件
 </div>
 
 </div>
 
-<!-- DEFCON -->
+<!-- 威胁等级 -->
 
 <div class="panel">
 
 <div class="label">
 <div class="dot"></div>
-Threat Condition
+威胁等级
 </div>
 
 <div class="value" id="defcon">
-GREEN
+绿色
 </div>
 
 <div class="info">
-Foundation global response condition remains normal.
+基金会整体威胁等级正常
 </div>
 
 </div>
@@ -346,15 +347,15 @@ Foundation global response condition remains normal.
 
 <div class="label">
 <div class="dot"></div>
-Active Event
+当前事件
 </div>
 
 <div class="value" id="event">
-NONE
+无异常
 </div>
 
 <div class="info">
-No active anomalous incidents detected.
+当前未发现重大异常活动
 </div>
 
 </div>
@@ -362,7 +363,7 @@ No active anomalous incidents detected.
 </div>
 
 <a class="back" href="index.html">
-RETURN TO SITE-84
+返回 NIGHT
 </a>
 
 <script>
@@ -379,12 +380,12 @@ document.getElementById("players")
 
 },4000);
 
-/* DEFCON */
+/* 威胁等级 */
 
 const defcons=[
-"GREEN",
-"YELLOW",
-"RED"
+"绿色",
+"黄色",
+"红色"
 ];
 
 setInterval(()=>{
@@ -397,19 +398,19 @@ document.getElementById("defcon")
 
 },7000);
 
-/* 事件 */
+/* 当前事件 */
 
 const events=[
 
-"NONE",
+"无异常",
 
-"CONTAINMENT BREACH",
+"收容突破",
 
-"HCZ LOCKDOWN",
+"HCZ封锁",
 
-"096 ACTIVITY",
+"096活动",
 
-"MTF DEPLOYMENT"
+"MTF部署"
 
 ];
 

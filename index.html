@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SITE-84</title>
+<title>NIGHT</title>
 
 <style>
 
@@ -20,7 +20,7 @@ color:white;
 overflow-x:hidden;
 }
 
-/* 入场动画 */
+/* 入场 */
 
 #intro{
 position:fixed;
@@ -34,27 +34,25 @@ flex-direction:column;
 justify-content:center;
 align-items:center;
 z-index:9999;
-animation:fadeOut 1s ease forwards;
+animation:fadeOut 1s forwards;
 animation-delay:4s;
 }
 
 #intro h1{
-font-size:50px;
-letter-spacing:8px;
+font-size:70px;
+letter-spacing:10px;
 color:red;
-margin-bottom:20px;
 text-shadow:0 0 20px red;
 }
 
 #intro p{
-color:#aaa;
-font-size:18px;
-margin-top:10px;
-letter-spacing:4px;
+margin-top:20px;
+color:#888;
+letter-spacing:5px;
 }
 
 .loading{
-width:250px;
+width:260px;
 height:2px;
 background:#222;
 margin-top:30px;
@@ -63,8 +61,8 @@ overflow:hidden;
 
 .loading span{
 display:block;
-height:100%;
 width:0%;
+height:100%;
 background:red;
 animation:load 4s linear forwards;
 }
@@ -81,7 +79,7 @@ visibility:hidden;
 }
 }
 
-/* 背景 */
+/* 动态背景 */
 
 body::before{
 content:"";
@@ -90,7 +88,7 @@ width:100%;
 height:100%;
 background:
 radial-gradient(circle,
-rgba(255,0,0,0.12),
+rgba(255,0,0,.1),
 transparent 70%);
 animation:bg 6s infinite alternate;
 z-index:-2;
@@ -98,8 +96,10 @@ z-index:-2;
 
 @keyframes bg{
 0%{transform:scale(1);}
-100%{transform:scale(1.2);}
+100%{transform:scale(1.15);}
 }
+
+/* 扫描线 */
 
 .scan{
 position:fixed;
@@ -108,8 +108,8 @@ height:100%;
 background:
 repeating-linear-gradient(
 to bottom,
-rgba(255,0,0,0.05),
-rgba(255,0,0,0.05) 1px,
+rgba(255,0,0,.04),
+rgba(255,0,0,.04) 1px,
 transparent 3px,
 transparent 5px
 );
@@ -117,7 +117,7 @@ pointer-events:none;
 z-index:-1;
 }
 
-/* 主页 */
+/* 标题 */
 
 header{
 padding-top:100px;
@@ -125,24 +125,23 @@ text-align:center;
 }
 
 .logo{
-font-size:80px;
-font-weight:bold;
-letter-spacing:8px;
+font-size:90px;
+letter-spacing:10px;
 text-shadow:
-0 0 15px white,
-0 0 30px red;
+0 0 15px red,
+0 0 35px red;
 animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
 0%{
 text-shadow:
-0 0 15px white,
+0 0 15px red,
 0 0 25px red;
 }
 100%{
 text-shadow:
-0 0 25px white,
+0 0 25px red,
 0 0 45px red;
 }
 }
@@ -150,30 +149,38 @@ text-shadow:
 .subtitle{
 margin-top:20px;
 font-size:18px;
+color:#888;
 letter-spacing:6px;
-color:#999;
 }
+
+/* 警报 */
 
 .alert{
 width:90%;
-max-width:800px;
+max-width:900px;
 margin:50px auto 20px;
 padding:25px;
-border:1px solid red;
 background:rgba(255,0,0,.08);
-color:#ff6666;
-font-size:24px;
+border:1px solid red;
+font-size:22px;
+color:#ff5555;
 animation:pulse 2s infinite;
 }
 
 @keyframes pulse{
-0%{box-shadow:0 0 10px rgba(255,0,0,.2);}
-100%{box-shadow:0 0 25px rgba(255,0,0,.5);}
+0%{
+box-shadow:0 0 10px rgba(255,0,0,.2);
 }
+100%{
+box-shadow:0 0 30px rgba(255,0,0,.4);
+}
+}
+
+/* 广播 */
 
 .broadcast{
 width:90%;
-max-width:800px;
+max-width:900px;
 margin:20px auto;
 padding:18px;
 background:black;
@@ -185,14 +192,17 @@ white-space:nowrap;
 .broadcast span{
 display:inline-block;
 padding-left:100%;
-animation:move 14s linear infinite;
+animation:move 15s linear infinite;
 color:#ccc;
-font-size:18px;
 }
 
 @keyframes move{
-0%{transform:translateX(0);}
-100%{transform:translateX(-100%);}
+0%{
+transform:translateX(0);
+}
+100%{
+transform:translateX(-100%);
+}
 }
 
 /* 卡片 */
@@ -208,10 +218,10 @@ gap:30px;
 
 .card{
 display:block;
-text-decoration:none;
 background:rgba(0,0,0,.8);
 border:1px solid #222;
 padding:35px;
+text-decoration:none;
 color:white;
 transition:.3s;
 position:relative;
@@ -246,8 +256,8 @@ margin-bottom:12px;
 }
 
 .card p{
+color:#999;
 font-size:18px;
-color:#aaa;
 line-height:1.6;
 }
 
@@ -269,16 +279,18 @@ padding:22px;
 text-align:center;
 background:linear-gradient(90deg,#550000,#aa0000);
 border:1px solid red;
-color:white;
 font-size:24px;
+color:white;
 text-decoration:none;
 transition:.3s;
 }
 
 .join:hover{
-transform:scale(1.02);
+transform:scale(1.03);
 box-shadow:0 0 30px rgba(255,0,0,.5);
 }
+
+/* 手机 */
 
 @media(max-width:768px){
 
@@ -303,7 +315,7 @@ font-size:18px;
 
 <div id="intro">
 
-<h1>SITE-84</h1>
+<h1>NIGHT</h1>
 
 <p>INITIALIZING FOUNDATION NETWORK...</p>
 
@@ -311,7 +323,7 @@ font-size:18px;
 <span></span>
 </div>
 
-<p style="margin-top:30px;color:#666;">
+<p style="margin-top:25px;color:#666;">
 ACCESS GRANTED
 </p>
 
@@ -322,7 +334,7 @@ ACCESS GRANTED
 <header>
 
 <div class="logo">
-SITE-84
+NIGHT
 </div>
 
 <div class="subtitle">
@@ -332,12 +344,12 @@ SECURE • CONTAIN • PROTECT
 </header>
 
 <div class="alert">
-SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
+NIGHT 系统已上线 ｜ SCP:RP 收容状态稳定
 </div>
 
 <div class="broadcast">
 <span>
-[ SITE-84 BROADCAST ] Internal Security Department online ｜ GOC activity detected ｜ MTF-Epsilon-11 ready ｜ SCP containment stable
+[ NIGHT 广播 ] Internal Security Department online ｜ GOC activity detected ｜ MTF-E11 ready ｜ 收容系统稳定
 </span>
 </div>
 
@@ -345,10 +357,10 @@ SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
 
 <a class="card" href="departments.html">
 
-<h2>Department Database</h2>
+<h2>部门数据库</h2>
 
 <p>
-Internal Foundation departments and command structures.
+查看 NIGHT 内部部门与组织结构
 </p>
 
 <small>DATABASE ONLINE</small>
@@ -357,22 +369,22 @@ Internal Foundation departments and command structures.
 
 <a class="card" href="events.html">
 
-<h2>Site Events</h2>
+<h2>站点活动</h2>
 
 <p>
-Current anomalous activities and containment operations.
+查看当前异常活动与收容行动
 </p>
 
-<small>EVENT STREAM ACTIVE</small>
+<small>EVENT FEED ACTIVE</small>
 
 </a>
 
 <a class="card" href="mtf.html">
 
-<h2>MTF Units</h2>
+<h2>MTF 部队</h2>
 
 <p>
-Mobile Task Force deployment and operational status.
+机动特遣队部署与行动状态
 </p>
 
 <small>TASK FORCE READY</small>
@@ -381,10 +393,10 @@ Mobile Task Force deployment and operational status.
 
 <a class="card" href="status.html">
 
-<h2>System Status</h2>
+<h2>服务器状态</h2>
 
 <p>
-Current SITE-84 network and server condition.
+Night SCP:RP 服务器运行状态
 </p>
 
 <small>SYSTEM ONLINE</small>
@@ -397,7 +409,7 @@ Current SITE-84 network and server condition.
 href="https://qm.qq.com/q/iIPAlLJQ7m"
 target="_blank">
 
-JOIN SITE-84
+加入 NIGHT
 
 </a>
 
