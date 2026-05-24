@@ -1,114 +1,266 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Site Events</title>
+
+<title>SCP DATABASE</title>
 
 <style>
 
-body{
-background:#050505;
-color:white;
-font-family:Arial;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#000;
+color:white;
 overflow-x:hidden;
 }
+
+/* 背景 */
 
 body::before{
 content:"";
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background:
-radial-gradient(circle,
-rgba(255,0,0,.08),
-transparent 70%);
-animation:bg 6s infinite alternate;
-z-index:-1;
+linear-gradient(rgba(255,0,0,.04) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,0,0,.04) 1px, transparent 1px);
+background-size:40px 40px;
+animation:bgmove 15s linear infinite;
+z-index:-2;
 }
 
-@keyframes bg{
-0%{transform:scale(1);}
-100%{transform:scale(1.1);}
+@keyframes bgmove{
+
+0%{
+transform:translateY(0);
 }
 
-header{
-text-align:center;
-padding:60px 20px;
+100%{
+transform:translateY(40px);
 }
 
-h1{
-font-size:55px;
-text-shadow:0 0 20px red;
 }
 
-.sub{
-color:#888;
-letter-spacing:4px;
+/* 扫描线 */
+
+.scan{
+position:fixed;
+width:100%;
+height:100%;
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,.03),
+rgba(255,255,255,.03) 1px,
+transparent 2px,
+transparent 5px
+);
+pointer-events:none;
+z-index:99;
 }
 
-.timeline{
-width:90%;
-max-width:900px;
+/* 主体 */
+
+.container{
+max-width:950px;
 margin:auto;
-padding-bottom:80px;
+padding:30px;
 }
 
-.event{
-position:relative;
+/* 标题 */
+
+.title{
+text-align:center;
+font-size:64px;
+letter-spacing:10px;
+margin-top:30px;
+text-shadow:
+0 0 10px red,
+0 0 30px red;
+animation:flicker 3s infinite;
+}
+
+.subtitle{
+text-align:center;
+margin-top:15px;
+color:#777;
+letter-spacing:5px;
+margin-bottom:40px;
+}
+
+@keyframes flicker{
+
+0%,18%,22%,25%,53%,57%,100%{
+opacity:1;
+}
+
+20%,24%,55%{
+opacity:.4;
+}
+
+}
+
+/* 终端 */
+
+.terminal{
+background:#020202;
+border:1px solid #222;
+padding:20px;
+font-family:monospace;
+color:#00ff66;
+line-height:1.8;
+margin-bottom:30px;
+min-height:120px;
+box-shadow:0 0 20px rgba(0,255,100,.08);
+}
+
+/* 搜索 */
+
+.search-box{
+display:flex;
+gap:10px;
 margin-bottom:35px;
-padding:25px 30px;
-border-left:3px solid red;
-background:rgba(255,0,0,.05);
+}
+
+.search-box input{
+flex:1;
+padding:20px;
+background:#050505;
+border:1px solid #222;
+color:white;
+font-size:18px;
+outline:none;
+}
+
+.search-box input:focus{
+border-color:red;
+box-shadow:0 0 15px rgba(255,0,0,.2);
+}
+
+.search-box button{
+padding:20px 30px;
+background:#700000;
+border:none;
+color:white;
+font-size:16px;
+cursor:pointer;
 transition:.3s;
 }
 
-.event:hover{
-transform:translateX(8px);
-box-shadow:0 0 20px rgba(255,0,0,.25);
+.search-box button:hover{
+background:red;
 }
 
-.time{
-color:#ff4444;
-font-size:18px;
+/* SCP卡片 */
+
+.card{
+background:rgba(0,0,0,.85);
+border:1px solid #222;
+padding:28px;
+margin-bottom:25px;
+transition:.3s;
+position:relative;
+overflow:hidden;
+}
+
+.card:hover{
+transform:translateY(-4px);
+border-color:red;
+box-shadow:0 0 20px rgba(255,0,0,.2);
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:2px;
+background:red;
+animation:line 4s linear infinite;
+}
+
+@keyframes line{
+
+0%{
+left:-100%;
+}
+
+100%{
+left:100%;
+}
+
+}
+
+.card h2{
+font-size:36px;
 margin-bottom:10px;
 }
 
-.title{
-font-size:32px;
-margin-bottom:12px;
+.card p{
+color:#888;
+line-height:1.8;
 }
 
-.desc{
-color:#aaa;
-line-height:1.7;
-font-size:18px;
-}
-
-.level{
-margin-top:15px;
-color:#660000;
-letter-spacing:3px;
-font-size:13px;
-}
-
-.back{
-display:block;
-width:220px;
-margin:40px auto;
-padding:18px;
-text-align:center;
-background:#550000;
-border:1px solid red;
+.card a{
+display:inline-block;
+margin-top:18px;
+padding:12px 20px;
+background:#700000;
 color:white;
 text-decoration:none;
 transition:.3s;
 }
 
+.card a:hover{
+background:red;
+}
+
+/* 返回 */
+
+.back{
+display:block;
+text-align:center;
+padding:22px;
+margin-top:45px;
+background:linear-gradient(90deg,#550000,#aa0000);
+border:1px solid red;
+color:white;
+text-decoration:none;
+font-size:24px;
+transition:.3s;
+}
+
 .back:hover{
-transform:scale(1.03);
-box-shadow:0 0 25px rgba(255,0,0,.4);
+transform:scale(1.02);
+box-shadow:0 0 25px rgba(255,0,0,.3);
+}
+
+/* 手机 */
+
+@media(max-width:768px){
+
+.title{
+font-size:42px;
+}
+
+.search-box{
+flex-direction:column;
+}
+
+.card h2{
+font-size:28px;
+}
+
 }
 
 </style>
@@ -116,103 +268,194 @@ box-shadow:0 0 25px rgba(255,0,0,.4);
 
 <body>
 
-<header>
+<div class="scan"></div>
 
-<h1>Site Events</h1>
-
-<div class="sub">
-SITE-84 EVENT FEED
-</div>
-
-</header>
-
-<div class="timeline">
-
-<div class="event">
-
-<div class="time">
-05:32
-</div>
+<div class="container">
 
 <div class="title">
-Containment Instability Detected
+SCP DATABASE
 </div>
 
-<div class="desc">
-Low-level anomalous fluctuations detected inside Sector-C containment zone.
+<div class="subtitle">
+SITE-84 INTERNAL ARCHIVE
 </div>
 
-<div class="level">
-THREAT LEVEL : LOW
-</div>
+<!-- 终端 -->
 
-</div>
+<div class="terminal" id="terminal"></div>
 
-<div class="event">
+<!-- 搜索 -->
 
-<div class="time">
-06:10
-</div>
+<div class="search-box">
 
-<div class="title">
-MTF-Epsilon-11 Deployment
-</div>
+<input
+type="text"
+id="scpInput"
+placeholder="输入 SCP 编号，例如：173 / SCP-173 / SCP-CN-001"
+>
 
-<div class="desc">
-Mobile Task Force entered underground access tunnels for investigation.
-</div>
-
-<div class="level">
-RESPONSE STATUS : ACTIVE
-</div>
+<button onclick="searchSCP()">
+访问档案
+</button>
 
 </div>
 
-<div class="event">
+<!-- SCP -->
 
-<div class="time">
-08:45
-</div>
+<div class="card">
 
-<div class="title">
-GOC External Transmission
-</div>
+<h2>SCP-173</h2>
 
-<div class="desc">
-Encrypted communication received from Global Occult Coalition.
-</div>
+<p>
+雕像型异常实体。必须保持持续视觉接触。
+</p>
 
-<div class="level">
-CLEARANCE LEVEL : 4
-</div>
+<a href="https://scp-wiki-cn.wikidot.com/scp-173"
+target="_blank">
 
-</div>
+打开中文档案
 
-<div class="event">
-
-<div class="time">
-10:02
-</div>
-
-<div class="title">
-Internal Security Sweep
-</div>
-
-<div class="desc">
-Internal Security Department completed personnel verification scan.
-</div>
-
-<div class="level">
-STATUS : COMPLETE
-</div>
-
-</div>
-
-</div>
-
-<a class="back" href="index.html">
-RETURN
 </a>
+
+</div>
+
+<div class="card">
+
+<h2>SCP-096</h2>
+
+<p>
+不可查看面部的人形异常。
+</p>
+
+<a href="https://scp-wiki-cn.wikidot.com/scp-096"
+target="_blank">
+
+打开中文档案
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>SCP-CN-001</h2>
+
+<p>
+中文分部 SCP-CN 系列档案。
+</p>
+
+<a href="https://scp-wiki-cn.wikidot.com/scp-cn-001"
+target="_blank">
+
+打开中文档案
+
+</a>
+
+</div>
+
+<a href="index.html" class="back">
+
+返回 SITE-84
+
+</a>
+
+</div>
+
+<script>
+
+/* 终端 */
+
+const terminalLines = [
+
+"> CONNECTING TO SCP-CN DATABASE",
+
+"> ACCESS LEVEL VERIFIED",
+
+"> INTERNAL NETWORK ONLINE",
+
+"> SEARCH SYSTEM READY",
+
+"> SCP-CN ARCHIVE CONNECTED"
+
+];
+
+let terminal = document.getElementById("terminal");
+
+let current = 0;
+
+function typeLine(){
+
+if(current >= terminalLines.length){
+return;
+}
+
+let text = terminalLines[current];
+
+let div = document.createElement("div");
+
+terminal.appendChild(div);
+
+let i = 0;
+
+let typing = setInterval(()=>{
+
+div.innerHTML += text.charAt(i);
+
+i++;
+
+if(i >= text.length){
+
+clearInterval(typing);
+
+current++;
+
+setTimeout(typeLine,350);
+
+}
+
+},30);
+
+}
+
+typeLine();
+
+/* 搜索 */
+
+function searchSCP(){
+
+let value =
+document.getElementById("scpInput")
+.value.trim().toLowerCase();
+
+if(value === "") return;
+
+/* 自动补 SCP */
+
+if(!value.startsWith("scp")){
+
+if(value.includes("cn")){
+
+value = "scp-" + value;
+
+}else{
+
+value = "scp-" + value;
+
+}
+
+}
+
+/* 跳转 */
+
+window.open(
+"https://scp-wiki-cn.wikidot.com/" + value,
+"_blank"
+);
+
+}
+
+</script>
 
 </body>
 </html>
+```2
