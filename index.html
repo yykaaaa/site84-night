@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,409 +9,264 @@
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-background:#000;
-color:white;
-font-family:Arial,sans-serif;
-overflow-x:hidden;
-animation:fadeIn 1.2s ease;
-position:relative;
-min-height:100vh;
+    background:#050505;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow-x:hidden;
+    position:relative;
 }
 
-/* 动态背景 */
+/* 背景动画 */
 
 body::before{
-content:"";
-position:fixed;
-top:-30%;
-left:-30%;
-width:160%;
-height:160%;
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    top:-50%;
+    left:-50%;
+    background:
+    radial-gradient(circle at center,
+    rgba(255,0,0,0.18),
+    transparent 60%);
+    animation:bgMove 12s linear infinite;
+    z-index:-3;
+}
 
-background:
+@keyframes bgMove{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
+}
 
-radial-gradient(
-circle at center,
-rgba(120,0,0,0.18),
-transparent 45%
-),
+/* 红色雾气 */
 
-radial-gradient(
-circle at 20% 80%,
-rgba(255,255,255,0.05),
-transparent 40%
-),
+.fog{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    radial-gradient(circle at 20% 30%,
+    rgba(255,0,0,0.08),
+    transparent 30%),
 
-radial-gradient(
-circle at 80% 20%,
-rgba(80,0,0,0.12),
-transparent 35%
-);
+    radial-gradient(circle at 80% 70%,
+    rgba(255,0,0,0.08),
+    transparent 30%);
+    
+    animation:fogMove 8s ease-in-out infinite alternate;
+    z-index:-2;
+}
 
-animation:bgMove 8s ease-in-out infinite alternate;
-
-z-index:0;
-pointer-events:none;
-filter:blur(70px);
-opacity:1;
+@keyframes fogMove{
+    from{
+        transform:translateY(-10px);
+    }
+    to{
+        transform:translateY(10px);
+    }
 }
 
 /* 扫描线 */
 
-body::after{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-
-background:
-repeating-linear-gradient(
-to bottom,
-rgba(255,255,255,0.03),
-rgba(255,255,255,0.03) 1px,
-transparent 1px,
-transparent 4px
-);
-
-opacity:0.18;
-
-z-index:1;
+.scanlines{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03),
+        rgba(255,255,255,0.03) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events:none;
+    z-index:-1;
 }
 
-/* 页面 */
+/* 粒子 */
+
+.particle{
+    position:fixed;
+    width:2px;
+    height:2px;
+    background:red;
+    opacity:0.3;
+    border-radius:50%;
+    animation:float 10s linear infinite;
+}
+
+@keyframes float{
+    from{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    50%{
+        opacity:0.5;
+    }
+    to{
+        transform:translateY(-100vh);
+        opacity:0;
+    }
+}
 
 .container{
-max-width:760px;
-margin:auto;
-padding:50px 20px;
-position:relative;
-z-index:2;
+    width:90%;
+    max-width:700px;
+    margin:auto;
+    padding-top:80px;
+    padding-bottom:80px;
 }
-
-/* logo */
 
 .logo{
-width:110px;
-display:block;
-margin:auto;
-margin-bottom:25px;
-filter:invert(1);
-opacity:0.95;
-transition:0.4s;
+    text-align:center;
+    margin-bottom:30px;
 }
 
-.logo:hover{
-transform:scale(1.03);
+.logo h1{
+    font-size:72px;
+    letter-spacing:10px;
+    color:white;
+    text-shadow:
+    0 0 10px rgba(255,255,255,0.4),
+    0 0 30px rgba(255,0,0,0.3);
 }
 
-/* 标题 */
-
-.title{
-text-align:center;
-font-size:42px;
-letter-spacing:5px;
-margin-bottom:14px;
-font-weight:bold;
+.logo p{
+    margin-top:10px;
+    color:#999;
+    letter-spacing:5px;
+    font-size:18px;
 }
-
-/* 打字机 */
-
-.typing{
-text-align:center;
-color:#888;
-margin-bottom:45px;
-font-size:14px;
-letter-spacing:2px;
-overflow:hidden;
-white-space:nowrap;
-border-right:2px solid #666;
-width:0;
-margin-left:auto;
-margin-right:auto;
-
-animation:
-typing 4s steps(30,end) forwards,
-blink .8s infinite;
-}
-
-/* SCP 红色警报 */
 
 .alert{
-border:1px solid #2a0d0d;
-background:#120404;
-color:#ff4d4d;
-padding:14px;
-margin-bottom:18px;
-font-size:13px;
-letter-spacing:1px;
-animation:alertBlink 3s infinite;
+    border:1px solid rgba(255,0,0,0.3);
+    background:rgba(255,0,0,0.08);
+    padding:25px;
+    margin-bottom:25px;
+    color:#ff5b5b;
+    font-size:18px;
+    animation:pulse 2s infinite;
 }
 
-/* 广播 */
-
-.warning{
-border:1px solid #1b1b1b;
-background:#050505;
-padding:15px;
-margin-bottom:30px;
-color:#888;
-font-size:13px;
-transition:0.4s;
+@keyframes pulse{
+    0%{
+        box-shadow:0 0 5px rgba(255,0,0,0.1);
+    }
+    50%{
+        box-shadow:0 0 20px rgba(255,0,0,0.3);
+    }
+    100%{
+        box-shadow:0 0 5px rgba(255,0,0,0.1);
+    }
 }
 
-/* 卡片 */
+.broadcast{
+    background:black;
+    border:1px solid #222;
+    padding:20px;
+    margin-bottom:30px;
+    color:#aaa;
+}
 
 .card{
-display:block;
-text-decoration:none;
-color:white;
-
-border:1px solid #1c1c1c;
-background:#050505;
-
-padding:24px;
-margin-bottom:18px;
-
-transition:0.25s;
-
-position:relative;
-overflow:hidden;
-backdrop-filter:blur(4px);
+    background:rgba(0,0,0,0.75);
+    border:1px solid #222;
+    padding:40px;
+    margin-bottom:25px;
+    transition:0.3s;
+    cursor:pointer;
+    backdrop-filter:blur(3px);
 }
-
-/* hover */
 
 .card:hover{
-transform:translateY(-2px);
-border-color:#444;
-background:#090909;
+    transform:translateY(-5px);
+    border-color:red;
+    box-shadow:0 0 20px rgba(255,0,0,0.25);
 }
-
-/* 左侧线 */
-
-.card::before{
-content:"";
-position:absolute;
-left:0;
-top:0;
-width:2px;
-height:100%;
-background:#777;
-opacity:0;
-transition:0.3s;
-}
-
-.card:hover::before{
-opacity:1;
-}
-
-/* 标题 */
 
 .card h2{
-margin-bottom:8px;
-font-size:20px;
+    font-size:28px;
+    margin-bottom:15px;
 }
-
-/* 描述 */
 
 .card p{
-color:#777;
-font-size:14px;
+    color:#888;
+    font-size:18px;
 }
-
-/* footer */
 
 .footer{
-margin-top:50px;
-text-align:center;
-color:#333;
-font-size:12px;
-letter-spacing:2px;
-}
-
-/* 背景移动 */
-
-@keyframes bgMove{
-
-0%{
-transform:translate(0px,0px) scale(1);
-}
-
-100%{
-transform:translate(-50px,-40px) scale(1.1);
-}
-
-}
-
-/* 页面淡入 */
-
-@keyframes fadeIn{
-
-from{
-opacity:0;
-transform:translateY(8px);
-}
-
-to{
-opacity:1;
-transform:translateY(0);
-}
-
-}
-
-/* 打字机 */
-
-@keyframes typing{
-
-from{
-width:0;
-}
-
-to{
-width:280px;
-}
-
-}
-
-/* 光标 */
-
-@keyframes blink{
-
-50%{
-border-color:transparent;
-}
-
-}
-
-/* 警报闪烁 */
-
-@keyframes alertBlink{
-
-0%{
-opacity:0.7;
-}
-
-50%{
-opacity:1;
-}
-
-100%{
-opacity:0.7;
-}
-
+    text-align:center;
+    color:#666;
+    margin-top:50px;
+    font-size:14px;
 }
 
 </style>
-
 </head>
 
 <body>
 
+<div class="fog"></div>
+<div class="scanlines"></div>
+
+<!-- 粒子 -->
+<div class="particle" style="left:10%; animation-delay:0s;"></div>
+<div class="particle" style="left:25%; animation-delay:2s;"></div>
+<div class="particle" style="left:40%; animation-delay:4s;"></div>
+<div class="particle" style="left:60%; animation-delay:1s;"></div>
+<div class="particle" style="left:80%; animation-delay:3s;"></div>
+
 <div class="container">
 
-<img
-class="logo"
-src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/SCP_Foundation_%28emblem%29.svg/2048px-SCP_Foundation_%28emblem%29.svg.png"
->
+    <div class="logo">
+        <h1>SITE-84</h1>
+        <p>SECURE. CONTAIN. PROTECT.</p>
+    </div>
 
-<div class="title">
-SITE-84
-</div>
+    <div class="alert">
+        SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
+    </div>
 
-<div class="typing">
-SECURE. CONTAIN. PROTECT.
-</div>
+    <div class="broadcast">
+        [ 站点广播 ] SITE-84 当前状态：稳定
+    </div>
 
-<div class="alert">
-SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
-</div>
+    <div class="card">
+        <h2>部门数据库</h2>
+        <p>查看 Site-84 内部部门信息</p>
+    </div>
 
-<div class="warning" id="broadcast">
-[ SITE NOTICE ] 正在连接基金会广播系统...
-</div>
+    <div class="card">
+        <h2>站点活动</h2>
+        <p>查看当前 SCP 收容行动与活动</p>
+    </div>
 
-<a class="card" href="departments.html">
-<h2>部门数据库</h2>
-<p>查看 Site-84 内部部门信息</p>
-</a>
+    <div class="card">
+        <h2>服务器状态</h2>
+        <p>当前服务器在线，响应正常</p>
+    </div>
 
-<a class="card" href="events.html">
-<h2>站点活动</h2>
-<p>查看当前 SCP 收容行动与活动</p>
-</a>
+    <div class="card">
+        <h2>异常档案</h2>
+        <p>访问 SCP 异常项目数据库</p>
+    </div>
 
-<a class="card" href="status.html">
-<h2>服务器状态</h2>
-<p>查看 SCP:RP 服务器运行状态</p>
-</a>
-
-<a
-class="card"
-href="https://qm.qq.com/q/AP811As4fe"
-target="_blank"
->
-<h2>加入站点</h2>
-<p>进入 SITE-84 官方通讯频道</p>
-</a>
-
-<div class="footer">
-SITE-84 INTERNAL TERMINAL
-</div>
+    <div class="footer">
+        SITE-84 INTERNAL NETWORK
+    </div>
 
 </div>
-
-<script>
-
-const broadcasts = [
-
-"[ 站点广播 ] MTF-E11 已进入收容区",
-
-"[ 站点广播 ] 检测到异常精神指数波动",
-
-"[ 站点广播 ] SITE-84 当前状态：稳定",
-
-"[ 站点广播 ] Internal Security Department 正在巡查",
-
-"[ 站点广播 ] 检测到 Keter 级异常活动",
-
-"[ 站点广播 ] GOC 联络通道已建立"
-
-];
-
-let current = 0;
-
-const box = document.getElementById("broadcast");
-
-setInterval(()=>{
-
-current++;
-
-if(current >= broadcasts.length){
-current = 0;
-}
-
-box.style.opacity = 0;
-
-setTimeout(()=>{
-
-box.innerText = broadcasts[current];
-
-box.style.opacity = 1;
-
-},300);
-
-},5000);
-
-</script>
 
 </body>
 </html>
