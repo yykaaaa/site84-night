@@ -94,6 +94,19 @@ typing 4s steps(30,end) forwards,
 blink .8s infinite;
 }
 
+/* SCP 红色警报 */
+
+.alert{
+border:1px solid #2a0d0d;
+background:#120404;
+color:#ff4d4d;
+padding:14px;
+margin-bottom:18px;
+font-size:13px;
+letter-spacing:1px;
+animation:alertBlink 3s infinite;
+}
+
 /* warning */
 
 .warning{
@@ -103,6 +116,12 @@ padding:15px;
 margin-bottom:30px;
 color:#888;
 font-size:13px;
+}
+
+/* 广播系统 */
+
+#broadcast{
+transition:0.4s;
 }
 
 /* 卡片 */
@@ -170,7 +189,7 @@ font-size:12px;
 letter-spacing:2px;
 }
 
-/* 动画 */
+/* 页面淡入 */
 
 @keyframes fadeIn{
 from{
@@ -183,6 +202,8 @@ transform:translateY(0);
 }
 }
 
+/* 打字机 */
+
 @keyframes typing{
 from{
 width:0;
@@ -192,10 +213,30 @@ width:280px;
 }
 }
 
+/* 光标 */
+
 @keyframes blink{
 50%{
 border-color:transparent;
 }
+}
+
+/* 警报闪烁 */
+
+@keyframes alertBlink{
+
+0%{
+opacity:0.7;
+}
+
+50%{
+opacity:1;
+}
+
+100%{
+opacity:0.7;
+}
+
 }
 
 </style>
@@ -219,8 +260,12 @@ SITE-84
 SECURE. CONTAIN. PROTECT.
 </div>
 
-<div class="warning">
-[ SITE NOTICE ] 未授权访问将被记录并上报站点安保系统
+<div class="alert">
+SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
+</div>
+
+<div class="warning" id="broadcast">
+[ SITE NOTICE ] 正在连接基金会广播系统...
 </div>
 
 <a class="card" href="departments.html">
@@ -252,6 +297,50 @@ SITE-84 INTERNAL TERMINAL
 </div>
 
 </div>
+
+<script>
+
+const broadcasts = [
+
+"[ 站点广播 ] MTF-E11 已进入收容区",
+
+"[ 站点广播 ] 检测到异常精神指数波动",
+
+"[ 站点广播 ] SITE-84 当前状态：稳定",
+
+"[ 站点广播 ] Internal Security Department 正在巡查",
+
+"[ 站点广播 ] 检测到 Keter 级异常活动",
+
+"[ 站点广播 ] GOC 联络通道已建立"
+
+];
+
+let current = 0;
+
+const box = document.getElementById("broadcast");
+
+setInterval(()=>{
+
+current++;
+
+if(current >= broadcasts.length){
+current = 0;
+}
+
+box.style.opacity = 0;
+
+setTimeout(()=>{
+
+box.innerText = broadcasts[current];
+
+box.style.opacity = 1;
+
+},300);
+
+},5000);
+
+</script>
 
 </body>
 </html>
