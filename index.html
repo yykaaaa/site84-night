@@ -167,7 +167,7 @@ left:100%;
 
 }
 
-/* logo */
+/* LOGO */
 
 .logo{
 text-align:center;
@@ -302,7 +302,7 @@ background:#222;
 background:#444;
 }
 
-/* 用户信息 */
+/* 用户卡 */
 
 .profile{
 display:none;
@@ -338,7 +338,7 @@ border:1px solid #333;
 
 .profile h2{
 margin-bottom:10px;
-font-size:34px;
+font-size:30px;
 }
 
 .profile p{
@@ -378,15 +378,6 @@ letter-spacing:2px;
 
 .enter-btn:hover{
 background:#00aa00;
-}
-
-/* 错误 */
-
-.error{
-margin-top:15px;
-color:#ff4444;
-display:none;
-text-align:center;
 }
 
 /* 手机 */
@@ -492,12 +483,6 @@ SKIP LOGIN
 
 </button>
 
-<div class="error" id="error">
-
-INVALID PERSONNEL
-
-</div>
-
 <!-- 用户信息 -->
 
 <div class="profile" id="profile">
@@ -552,44 +537,6 @@ particles.appendChild(p);
 
 }
 
-/* 生成ID */
-
-function generateId(name){
-
-let hash = 0;
-
-for(let i=0;i<name.length;i++){
-
-hash += name.charCodeAt(i);
-
-}
-
-return "RBX-" + (hash * 84);
-
-}
-
-/* HASH */
-
-function generateHash(){
-
-const chars =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-let result = "84-";
-
-for(let i=0;i<8;i++){
-
-result +=
-chars.charAt(
-Math.floor(Math.random()*chars.length)
-);
-
-}
-
-return result;
-
-}
-
 /* 登录 */
 
 function fakeLogin(){
@@ -600,14 +547,9 @@ document.getElementById("username").value.trim();
 let role =
 document.getElementById("role").value;
 
-let error =
-document.getElementById("error");
-
-error.style.display = "none";
-
 if(username === ""){
 
-error.style.display = "block";
+alert("ENTER PERSONNEL NAME");
 return;
 
 }
@@ -629,25 +571,25 @@ clearances[
 Math.floor(Math.random()*clearances.length)
 ];
 
-/* UID */
+/* ID */
 
 let rbxId =
-generateId(username);
+"RBX-" + Math.floor(Math.random()*999999);
 
 /* HASH */
 
 let authHash =
-generateHash();
+"84-" +
+Math.random()
+.toString(36)
+.substring(2,8)
+.toUpperCase();
 
 /* SESSION */
 
 let session =
 "NIGHT-" +
 Math.floor(Math.random()*99999);
-
-/* 本地头像 */
-
-let avatar = "logo.png";
 
 /* 显示 */
 
@@ -658,33 +600,31 @@ document.getElementById("enterBtn")
 .style.display = "block";
 
 document.getElementById("avatar")
-.src = avatar;
+.src = "logo.png";
 
 document.getElementById("displayName")
 .innerText = username;
 
 document.getElementById("userInfo")
-.innerHTML = `
+.innerHTML =
 
-STATUS : VERIFIED
-<br>
-RBX ID : ${rbxId}
-<br>
-ROLE : ${role}
-<br>
-CLEARANCE : ${clearance}
-<br>
-AUTH HASH : ${authHash}
-<br>
-SESSION : ${session}
-<br>
-SITE : NIGHT SITE-84
+"STATUS : VERIFIED<br>" +
 
-`;
+"RBX ID : " + rbxId + "<br>" +
+
+"ROLE : " + role + "<br>" +
+
+"CLEARANCE : " + clearance + "<br>" +
+
+"AUTH HASH : " + authHash + "<br>" +
+
+"SESSION : " + session + "<br>" +
+
+"SITE : NIGHT SITE-84";
 
 }
 
-/* 进入 */
+/* 进入主页 */
 
 function enterSite(){
 
@@ -706,7 +646,7 @@ font-family:monospace;
 ACCESS GRANTED
 </h1>
 
-<div id="loadingText">
+<div>
 CONNECTING TO NIGHT SITE-84...
 </div>
 
