@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SITE-84</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#000;
+color:white;
+overflow-x:hidden;
+}
+
+/* 动态背景 */
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+linear-gradient(rgba(255,0,0,.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,0,0,.05) 1px, transparent 1px);
+background-size:40px 40px;
+animation:bgmove 15s linear infinite;
+z-index:-3;
+}
+
+@keyframes bgmove{
+
+0%{
+transform:translateY(0);
+}
+
+100%{
+transform:translateY(40px);
+}
+
+}
+
+/* 扫描线 */
+
+.scan{
+position:fixed;
+width:100%;
+height:100%;
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,.03),
+rgba(255,255,255,.03) 1px,
+transparent 2px,
+transparent 5px
+);
+pointer-events:none;
+z-index:99;
+}
+
+/* 粒子 */
+
+.particles{
+position:fixed;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-2;
+}
+
+.particle{
+position:absolute;
+width:2px;
+height:2px;
+background:red;
+opacity:.4;
+animation:float 12s linear infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+10%{
+opacity:.5;
+}
+
+100%{
+transform:translateY(-10vh);
+opacity:0;
+}
+
+}
+
+/* 顶部 */
+
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+position:relative;
+overflow:hidden;
+}
+
+/* logo */
+
+.logo{
+width:170px;
+margin-bottom:25px;
+animation:logoFloat 4s ease-in-out infinite;
+filter:
+drop-shadow(0 0 15px rgba(255,255,255,.2))
+drop-shadow(0 0 30px rgba(255,0,0,.3));
+}
+
+@keyframes logoFloat{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* 标题 */
+
+.title{
+font-size:72px;
+letter-spacing:12px;
+text-shadow:
+0 0 10px red,
+0 0 25px red,
+0 0 40px rgba(255,0,0,.5);
+animation:flicker 3s infinite;
+}
+
+@keyframes flicker{
+
+0%,18%,22%,25%,53%,57%,100%{
+opacity:1;
+}
+
+20%,24%,55%{
+opacity:.4;
+}
+
+}
+
+.subtitle{
+margin-top:20px;
+font-size:16px;
+letter-spacing:5px;
+color:#888;
+}
+
+/* 终端 */
+
+.terminal{
+margin-top:40px;
+width:700px;
+max-width:95%;
+background:#050505;
+border:1px solid #222;
+padding:20px;
+text-align:left;
+font-family:monospace;
+color:#00ff66;
+line-height:1.9;
+min-height:140px;
+box-shadow:0 0 25px rgba(0,255,100,.08);
+}
+
+/* 板块 */
+
+.sections{
+max-width:1200px;
+margin:80px auto;
+padding:20px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+}
+
+.card{
+background:rgba(0,0,0,.88);
+border:1px solid #222;
+padding:35px;
+text-align:center;
+transition:.35s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"";
+position:absolute;
+top:0;
+left:-100%;
+width:100%;
+height:2px;
+background:red;
+animation:lineMove 5s linear infinite;
+}
+
+@keyframes lineMove{
+
+0%{
+left:-100%;
+}
+
+100%{
+left:100%;
+}
+
+}
+
+.card:hover{
+transform:translateY(-6px);
+border-color:red;
+box-shadow:0 0 25px rgba(255,0,0,.2);
+}
+
+.card h2{
+font-size:28px;
+margin-bottom:15px;
+letter-spacing:3px;
+}
+
+.card p{
+color:#888;
+line-height:1.8;
+margin-bottom:25px;
+}
+
+.card a{
+display:inline-block;
+padding:14px 24px;
+background:linear-gradient(90deg,#550000,#aa0000);
+color:white;
+text-decoration:none;
+transition:.3s;
+}
+
+.card a:hover{
+background:red;
+}
+
+/* 状态 */
+
+.status-bar{
+max-width:1000px;
+margin:70px auto;
+padding:25px;
+background:#050505;
+border:1px solid #222;
+display:flex;
+justify-content:space-around;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.status-item{
+text-align:center;
+}
+
+.online{
+color:#00ff88;
+text-shadow:0 0 10px #00ff88;
+}
+
+/* QQ */
+
+.qq{
+text-align:center;
+margin:70px 20px;
+}
+
+.qq a{
+display:inline-block;
+padding:18px 35px;
+background:linear-gradient(90deg,#004488,#0077ff);
+color:white;
+text-decoration:none;
+font-size:20px;
+transition:.3s;
+}
+
+.qq a:hover{
+transform:scale(1.05);
+}
+
+/* 底部 */
+
+.footer{
+text-align:center;
+padding:40px 20px;
+color:#555;
+font-size:14px;
+letter-spacing:3px;
+}
+
+/* 手机 */
+
+@media(max-width:768px){
+
+.title{
+font-size:42px;
+letter-spacing:6px;
+}
+
+.subtitle{
+font-size:13px;
+}
+
+.logo{
+width:120px;
+}
+
+.terminal{
+font-size:12px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="scan"></div>
+
+<!-- 粒子 -->
+
+<div class="particles" id="particles"></div>
+
+<!-- 主界面 -->
+
+<section class="hero">
+
+<img src="logo.png" class="logo">
+
+<div class="title">
+SITE-84
+</div>
+
+<div class="subtitle">
+SECURE • CONTAIN • PROTECT
+</div>
+
+<div class="terminal" id="terminal"></div>
+
+</section>
+
+<!-- 状

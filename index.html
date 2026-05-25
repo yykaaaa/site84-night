@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>SITE-84 NIGHT</title>
+<title>SITE-84 LOGIN</title>
 
 <style>
 
@@ -17,386 +17,80 @@ font-family:Arial,sans-serif;
 
 body{
 background:#000;
+overflow:hidden;
 color:white;
-overflow-x:hidden;
-position:relative;
 }
 
-/* 动态深空背景 */
+/* 背景 */
 
 body::before{
 content:"";
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
 background:
-radial-gradient(circle at center,
-rgba(255,0,0,0.12),
-transparent 60%);
-animation:bgpulse 6s infinite alternate;
-z-index:-3;
-}
-
-@keyframes bgpulse{
-
-0%{
-transform:scale(1);
-filter:blur(0px);
-}
-
-100%{
-transform:scale(1.1);
-filter:blur(2px);
-}
-
-}
-
-/* 网格 */
-
-.grid-bg{
-position:fixed;
-width:100%;
-height:100%;
-background:
-linear-gradient(rgba(255,0,0,0.04) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,0,0,0.04) 1px, transparent 1px);
-background-size:45px 45px;
-animation:gridMove 18s linear infinite;
+linear-gradient(rgba(255,0,0,.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,0,0,.05) 1px, transparent 1px);
+background-size:40px 40px;
+animation:bgmove 12s linear infinite;
 z-index:-2;
 }
 
-@keyframes gridMove{
+@keyframes bgmove{
 
 0%{
 transform:translateY(0);
 }
 
 100%{
-transform:translateY(45px);
+transform:translateY(40px);
 }
 
 }
 
-/* 扫描 */
+/* 扫描线 */
 
 .scan{
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
 background:
 repeating-linear-gradient(
 to bottom,
-rgba(255,255,255,0.03),
-rgba(255,255,255,0.03) 1px,
+rgba(255,255,255,.03),
+rgba(255,255,255,.03) 1px,
 transparent 2px,
 transparent 5px
 );
 pointer-events:none;
 z-index:99;
-opacity:.4;
 }
 
-/* 入场 */
+/* 中心 */
 
-.loader{
-position:fixed;
+.container{
 width:100%;
-height:100%;
-background:black;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-z-index:9999;
-animation:fadeLoader 1s forwards;
-animation-delay:2s;
-}
-
-.loader img{
-width:120px;
-animation:spin 4s linear infinite;
-filter:drop-shadow(0 0 15px red);
-}
-
-.loader-text{
-margin-top:20px;
-color:#bbb;
-letter-spacing:6px;
-font-size:14px;
-animation:flicker 1s infinite;
-}
-
-@keyframes fadeLoader{
-
-to{
-opacity:0;
-visibility:hidden;
-}
-
-}
-
-@keyframes spin{
-
-0%{
-transform:rotate(0deg);
-}
-
-100%{
-transform:rotate(360deg);
-}
-
-}
-
-@keyframes flicker{
-
-50%{
-opacity:.4;
-}
-
-}
-
-/* 主体 */
-
-.container{
-max-width:1000px;
-margin:auto;
 padding:20px;
 }
 
-/* 顶部 */
+/* 登录框 */
 
-.top{
-text-align:center;
-margin-top:40px;
-position:relative;
-}
-
-/* LOGO */
-
-.logo{
-width:220px;
-max-width:70%;
-animation:float 5s ease-in-out infinite;
-filter:
-drop-shadow(0 0 10px rgba(255,255,255,.15))
-drop-shadow(0 0 30px rgba(255,0,0,.25));
-}
-
-@keyframes float{
-
-0%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-10px);
-}
-
-100%{
-transform:translateY(0);
-}
-
-}
-
-/* 标题 */
-
-.title{
-margin-top:25px;
-font-size:72px;
-letter-spacing:12px;
-font-weight:bold;
-text-shadow:
-0 0 10px red,
-0 0 30px red;
-animation:titleGlow 3s infinite alternate;
-}
-
-@keyframes titleGlow{
-
-0%{
-text-shadow:
-0 0 8px red,
-0 0 18px red;
-}
-
-100%{
-text-shadow:
-0 0 18px red,
-0 0 40px red;
-}
-
-}
-
-.subtitle{
-margin-top:15px;
-color:#888;
-letter-spacing:8px;
-font-size:15px;
-}
-
-/* 警报 */
-
-.alert{
-margin-top:40px;
-padding:22px;
-border:1px solid red;
-background:rgba(255,0,0,.08);
-font-size:22px;
-color:#ff4d4d;
-animation:alertPulse 2s infinite;
-backdrop-filter:blur(5px);
-}
-
-@keyframes alertPulse{
-
-0%{
-box-shadow:0 0 10px rgba(255,0,0,.2);
-}
-
-50%{
-box-shadow:0 0 35px rgba(255,0,0,.4);
-}
-
-100%{
-box-shadow:0 0 10px rgba(255,0,0,.2);
-}
-
-}
-
-/* 广播 */
-
-.broadcast{
-margin-top:20px;
-padding:16px;
+.login-box{
+width:430px;
+max-width:100%;
+background:rgba(0,0,0,.9);
 border:1px solid #222;
-background:rgba(0,0,0,.7);
-overflow:hidden;
-white-space:nowrap;
-color:#ccc;
-position:relative;
-}
-
-.broadcast span{
-display:inline-block;
-padding-left:100%;
-animation:broadcastMove 16s linear infinite;
-}
-
-@keyframes broadcastMove{
-
-0%{
-transform:translateX(0);
-}
-
-100%{
-transform:translateX(-100%);
-}
-
-}
-
-/* 状态条 */
-
-.status-bar{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:15px;
-margin-top:30px;
-}
-
-.status-box{
-background:rgba(0,0,0,.75);
-border:1px solid #222;
-padding:18px;
-text-align:center;
-transition:.3s;
-}
-
-.status-box:hover{
-border-color:red;
-transform:translateY(-3px);
-}
-
-.status-box h3{
-font-size:14px;
-color:#777;
-margin-bottom:10px;
-letter-spacing:3px;
-}
-
-.status-online{
-color:#00ff88;
-font-size:20px;
-text-shadow:0 0 10px #00ff88;
-}
-
-/* SCP终端 */
-
-.terminal{
-margin-top:35px;
-background:rgba(0,0,0,.85);
-border:1px solid #222;
-padding:25px;
-min-height:170px;
-font-family:monospace;
-color:#00ff66;
-line-height:1.9;
-box-shadow:0 0 25px rgba(0,255,100,.08);
-overflow:hidden;
-position:relative;
-}
-
-.terminal::before{
-content:"";
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:2px;
-background:#00ff66;
-animation:scanline 3s linear infinite;
-}
-
-@keyframes scanline{
-
-0%{
-left:-100%;
-}
-
-100%{
-left:100%;
-}
-
-}
-
-/* 卡片 */
-
-.cards{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:22px;
-margin-top:35px;
-}
-
-.card{
-background:rgba(0,0,0,.8);
-border:1px solid #222;
-padding:30px;
+padding:40px;
 position:relative;
 overflow:hidden;
-transition:.35s;
+box-shadow:0 0 35px rgba(255,0,0,.15);
 }
 
-.card:hover{
-transform:translateY(-6px);
-border-color:red;
-box-shadow:0 0 25px rgba(255,0,0,.2);
-}
-
-.card::before{
+.login-box::before{
 content:"";
 position:absolute;
 top:0;
@@ -419,65 +113,151 @@ left:100%;
 
 }
 
-.card h2{
-font-size:34px;
-margin-bottom:12px;
+/* LOGO */
+
+.logo{
+text-align:center;
+margin-bottom:20px;
 }
 
-.card p{
-color:#888;
-line-height:1.7;
+.logo img{
+width:130px;
+animation:float 4s ease-in-out infinite;
 }
 
-.card a{
-display:inline-block;
-margin-top:18px;
-padding:12px 20px;
-background:#8b0000;
+@keyframes float{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+/* 标题 */
+
+.title{
+text-align:center;
+font-size:44px;
+letter-spacing:8px;
+text-shadow:
+0 0 10px red,
+0 0 25px red;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#777;
+letter-spacing:4px;
+margin-bottom:35px;
+font-size:13px;
+}
+
+/* 输入框 */
+
+.input-group{
+margin-bottom:20px;
+}
+
+.input-group label{
+display:block;
+margin-bottom:8px;
+color:#999;
+letter-spacing:2px;
+font-size:13px;
+}
+
+.input-group input{
+width:100%;
+padding:16px;
+background:#050505;
+border:1px solid #222;
 color:white;
-text-decoration:none;
+font-size:15px;
+outline:none;
+}
+
+.input-group input:focus{
+border-color:red;
+box-shadow:0 0 15px rgba(255,0,0,.2);
+}
+
+/* 按钮 */
+
+.login-btn{
+width:100%;
+padding:18px;
+background:linear-gradient(90deg,#550000,#aa0000);
+border:none;
+color:white;
+font-size:18px;
+letter-spacing:3px;
+cursor:pointer;
 transition:.3s;
 }
 
-.card a:hover{
+.login-btn:hover{
 background:red;
 }
 
-/* 底部 */
+/* 用户信息 */
 
-.footer{
-margin:60px 0 25px;
+.profile{
+display:none;
+margin-top:25px;
+padding:20px;
+background:#050505;
+border:1px solid #222;
 text-align:center;
-color:#555;
-font-size:13px;
-letter-spacing:3px;
 }
 
-/* 手机 */
-
-@media(max-width:768px){
-
-.title{
-font-size:48px;
-letter-spacing:6px;
+.profile img{
+width:120px;
+border-radius:12px;
+margin-bottom:15px;
 }
 
-.cards{
-grid-template-columns:1fr;
+.profile h2{
+margin-bottom:10px;
 }
 
-.status-bar{
-grid-template-columns:1fr;
+.profile p{
+color:#888;
+line-height:1.8;
 }
 
-.logo{
-width:170px;
-}
+/* 进入 */
 
-.alert{
+.enter-btn{
+display:none;
+width:100%;
+margin-top:20px;
+padding:18px;
+background:#006600;
+border:none;
+color:white;
 font-size:18px;
+cursor:pointer;
+transition:.3s;
 }
 
+.enter-btn:hover{
+background:#00aa00;
+}
+
+.error{
+margin-top:15px;
+color:#ff4444;
+display:none;
+text-align:center;
 }
 
 </style>
@@ -485,261 +265,184 @@ font-size:18px;
 
 <body>
 
-<div class="grid-bg"></div>
 <div class="scan"></div>
-
-<!-- 加载 -->
-
-<div class="loader">
-
-<img src="logo.png">
-
-<div class="loader-text">
-INITIALIZING SITE-84 NETWORK
-</div>
-
-</div>
 
 <div class="container">
 
-<!-- 顶部 -->
+<div class="login-box">
 
-<div class="top">
-
-<img src="logo.png" class="logo">
+<div class="logo">
+<img src="logo.png">
+</div>
 
 <div class="title">
 SITE-84
 </div>
 
 <div class="subtitle">
-SECURE • CONTAIN • PROTECT
+ROBLOX PERSONNEL LOGIN
 </div>
 
-</div>
+<div class="input-group">
 
-<!-- 警报 -->
+<label>ROBLOX USERNAME</label>
 
-<div class="alert" id="alert">
-SITE ALERT : LOW LEVEL ANOMALOUS ACTIVITY DETECTED
-</div>
-
-<!-- 广播 -->
-
-<div class="broadcast">
-<span id="broadcastText">
-
-[ SITE-84 广播 ] Internal Security online ｜ MTF-E11 standby ｜ GOC communication connected
-
-</span>
-</div>
-
-<!-- 状态 -->
-
-<div class="status-bar">
-
-<div class="status-box">
-<h3>SITE CORE</h3>
-<div class="status-online">ONLINE</div>
-</div>
-
-<div class="status-box">
-<h3>MTF RESPONSE</h3>
-<div class="status-online">READY</div>
-</div>
-
-<div class="status-box">
-<h3>SERVER STATUS</h3>
-<div class="status-online">RUNNING</div>
-</div>
+<input
+type="text"
+id="username"
+placeholder="Enter Roblox Username"
+>
 
 </div>
 
-<!-- 终端 -->
+<button class="login-btn" onclick="loginRoblox()">
 
-<div class="terminal" id="terminal"></div>
+VERIFY PERSONNEL
 
-<!-- 功能 -->
+</button>
 
-<div class="cards">
+<div class="error" id="error">
 
-<div class="card">
-
-<h2>部门数据库</h2>
-
-<p>
-Research Department / Internal Security Department / GOC
-</p>
-
-<a href="departments.html">
-进入数据库
-</a>
+USER NOT FOUND
 
 </div>
 
-<div class="card">
+<div class="profile" id="profile">
 
-<h2>机动特遣队</h2>
+<img id="avatar">
 
-<p>
-MTF E-11 / Nu-7 / Alpha-1 operational records
-</p>
+<h2 id="displayName"></h2>
 
-<a href="mtf.html">
-查看部队
-</a>
+<p id="userInfo"></p>
 
 </div>
 
-<div class="card">
+<button class="enter-btn" id="enterBtn"
+onclick="enterSite()">
 
-<h2>SCP 档案</h2>
+ACCESS SITE-84
 
-<p>
-查看 SCP 收容档案与异常事件记录
-</p>
+</button>
 
-<a href="events.html">
-打开档案
-</a>
-
-</div>
-
-<div class="card">
-
-<h2>服务器状态</h2>
-
-<p>
-Night SCP:RP server monitoring system
-</p>
-
-<a href="status.html">
-进入系统
-</a>
-
-</div>
-
-</div>
-
-<!-- 加入 -->
-
-<div style="margin-top:35px;">
-
-<a href="https://qm.qq.com/q/iIPAlLJQ7m"
-style="
-display:block;
-text-align:center;
-padding:22px;
-background:linear-gradient(90deg,#550000,#aa0000);
-border:1px solid red;
-font-size:24px;
-color:white;
-text-decoration:none;
-transition:.3s;
-">
-
-加入 SITE-84
-
-</a>
-
-</div>
-
-<div class="footer">
-SITE-84 NIGHT INTERNAL NETWORK
 </div>
 
 </div>
 
 <script>
 
-/* 广播 */
+async function loginRoblox(){
 
-const broadcasts = [
+let username =
+document.getElementById("username").value.trim();
 
-"[ SITE-84 广播 ] Internal Security online",
+let error =
+document.getElementById("error");
 
-"[ 警告 ] 检测到异常现实波动",
+error.style.display = "none";
 
-"[ MTF-E11 ] 已进入待命状态",
+if(username === "") return;
 
-"[ SCP DATABASE ] 档案同步完成",
+try{
 
-"[ GOC ] 通信线路稳定",
+const response = await fetch(
+"https://users.roblox.com/v1/usernames/users",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+usernames:[username],
+excludeBannedUsers:false
+})
+}
+);
 
-"[ SITE-84 ] 收容状态正常"
+const data = await response.json();
 
-];
+if(!data.data || data.data.length === 0){
 
-let b = 0;
-
-setInterval(()=>{
-
-b++;
-
-document.getElementById("broadcastText")
-.innerText = broadcasts[b % broadcasts.length];
-
-},4000);
-
-/* 终端 */
-
-const terminalLines = [
-
-"> ACCESSING SITE-84 DATABASE",
-
-"> SECURITY CLEARANCE VERIFIED",
-
-"> INTERNAL NETWORK CONNECTED",
-
-"> GOC COMMUNICATION ONLINE",
-
-"> MTF RESPONSE TEAM READY",
-
-"> SCP CONTAINMENT STATUS : STABLE",
-
-"> SYSTEM STATUS : ONLINE"
-
-];
-
-let terminal = document.getElementById("terminal");
-
-let current = 0;
-
-function typeLine(){
-
-if(current >= terminalLines.length){
+error.style.display = "block";
 return;
-}
-
-let text = terminalLines[current];
-
-let div = document.createElement("div");
-
-terminal.appendChild(div);
-
-let i = 0;
-
-let typing = setInterval(()=>{
-
-div.innerHTML += text.charAt(i);
-
-i++;
-
-if(i >= text.length){
-
-clearInterval(typing);
-
-current++;
-
-setTimeout(typeLine,400);
 
 }
 
-},35);
+const user = data.data[0];
+
+const userId = user.id;
+
+const avatarResponse = await fetch(
+`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=420x420&format=Png&isCircular=false`
+);
+
+const avatarData = await response.json();
+
+document.getElementById("profile")
+.style.display = "block";
+
+document.getElementById("enterBtn")
+.style.display = "block";
+
+document.getElementById("avatar")
+.src = avatarData.data[0].imageUrl;
+
+document.getElementById("displayName")
+.innerText = user.name;
+
+document.getElementById("userInfo")
+.innerHTML = `
+
+USER ID : ${userId}
+<br>
+CLEARANCE : RESEARCHER
+<br>
+STATUS : VERIFIED
+
+`;
+
+}catch(e){
+
+error.style.display = "block";
 
 }
 
-typeLine();
+}
+
+function enterSite(){
+
+document.body.innerHTML = `
+
+<div style="
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:black;
+color:#00ff66;
+font-family:monospace;
+">
+
+<h1 style="margin-bottom:20px;">
+ACCESS GRANTED
+</h1>
+
+<div>
+CONNECTING TO SITE-84...
+</div>
+
+</div>
+
+`;
+
+setTimeout(()=>{
+
+window.location.href = "main.html";
+
+},2500);
+
+}
 
 </script>
 
