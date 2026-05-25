@@ -2,20 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SITE-84 MAIN</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>SITE-84</title>
 
 <style>
-body{
+
+*{
 margin:0;
 padding:0;
-background:black;
-font-family:Arial, sans-serif;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#000;
 color:white;
 overflow-x:hidden;
 }
 
-/* 背景扫描线 */
+/* 动态背景 */
+
 body::before{
 content:"";
 position:fixed;
@@ -24,238 +32,631 @@ left:0;
 width:100%;
 height:100%;
 background:
-repeating-linear-gradient(
-to bottom,
-rgba(255,255,255,0.03),
-rgba(255,255,255,0.03) 1px,
-transparent 2px,
-transparent 4px
-);
-pointer-events:none;
-z-index:999;
+linear-gradient(rgba(255,0,0,.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,0,0,.05) 1px, transparent 1px);
+background-size:40px 40px;
+animation:bgmove 12s linear infinite;
+z-index:-2;
 }
 
-/* 红色辉光 */
-body::after{
-content:"";
+@keyframes bgmove{
+
+0%{
+transform:translateY(0);
+}
+
+100%{
+transform:translateY(40px);
+}
+
+}
+
+/* 扫描线 */
+
+.scan{
 position:fixed;
-top:0;
-left:0;
 width:100%;
 height:100%;
-box-shadow:inset 0 0 150px rgba(255,0,0,0.25);
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,.03),
+rgba(255,255,255,.03) 1px,
+transparent 2px,
+transparent 5px
+);
 pointer-events:none;
+z-index:99;
+}
+
+/* 粒子 */
+
+.particles{
+position:fixed;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
+}
+
+.particle{
+position:absolute;
+width:2px;
+height:2px;
+background:red;
+opacity:.4;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+10%{
+opacity:.5;
+}
+
+100%{
+transform:translateY(-10vh);
+opacity:0;
+}
+
 }
 
 /* 主容器 */
+
 .container{
-width:90%;
-max-width:500px;
-margin:auto;
-padding-top:40px;
+width:100%;
+min-height:100vh;
+padding:25px;
+}
+
+/* 顶部 */
+
+.top{
+
 text-align:center;
+margin-top:20px;
+
 }
 
-/* Logo */
 .logo{
-width:150px;
-margin:auto;
-display:block;
-filter:drop-shadow(0 0 20px red);
+
+width:140px;
+
+filter:
+drop-shadow(0 0 15px rgba(255,255,255,.15))
+drop-shadow(0 0 25px rgba(255,0,0,.25));
+
+animation:floatlogo 4s ease-in-out infinite;
+
 }
 
-/* 标题 */
+@keyframes floatlogo{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
 .title{
+
 font-size:58px;
+
 letter-spacing:10px;
-margin-top:30px;
-color:white;
+
+margin-top:25px;
+
 text-shadow:
 0 0 10px red,
-0 0 20px red,
-0 0 40px red;
+0 0 25px red;
+
+animation:flicker 3s infinite;
+
+}
+
+@keyframes flicker{
+
+0%,18%,22%,25%,53%,57%,100%{
+opacity:1;
+}
+
+20%,24%,55%{
+opacity:.5;
+}
+
 }
 
 .subtitle{
-margin-top:10px;
-font-size:18px;
-letter-spacing:6px;
-color:#aaa;
+
+margin-top:12px;
+
+color:#888;
+
+letter-spacing:4px;
+
+font-size:14px;
+
 }
 
-/* 用户卡片 */
+/* 用户信息 */
+
 .profile{
-margin-top:40px;
+
+margin-top:35px;
+
+background:rgba(0,0,0,.88);
+
+border:1px solid #222;
+
 padding:25px;
-border:1px solid rgba(255,0,0,0.4);
-background:rgba(20,0,0,0.45);
-box-shadow:0 0 25px rgba(255,0,0,0.2);
-backdrop-filter:blur(5px);
+
+text-align:center;
+
+box-shadow:0 0 25px rgba(255,0,0,.12);
+
+animation:fadeUp 1s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
 }
 
 .avatar{
+
 width:120px;
 height:120px;
-border-radius:12px;
-border:2px solid red;
-box-shadow:0 0 20px red;
+
+border-radius:14px;
+
+border:2px solid #333;
+
+margin-bottom:15px;
+
+box-shadow:0 0 20px rgba(255,0,0,.2);
+
 }
 
 .username{
-margin-top:15px;
-font-size:30px;
-font-weight:bold;
+
+font-size:32px;
+margin-bottom:8px;
+
 }
 
 .role{
-margin-top:10px;
-font-size:18px;
-color:#ff5e5e;
+
+color:#ff5555;
+
 letter-spacing:2px;
+
+font-size:15px;
+
+margin-bottom:10px;
+
 }
 
-.status{
-margin-top:10px;
+.verify{
+
+display:inline-block;
+
+padding:8px 16px;
+
+background:#002200;
+
+border:1px solid #00ff88;
+
 color:#00ff88;
-font-size:16px;
+
+font-size:13px;
+
+letter-spacing:2px;
+
 }
 
-/* 按钮 */
-.menu-btn{
-display:block;
-width:85%;
-margin:20px auto;
-padding:18px;
-text-align:center;
-background:#0f0f0f;
-border:1px solid #ff0000;
-color:white;
+/* 板块 */
+
+.menu{
+
+margin-top:35px;
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+.card{
+
+background:rgba(10,10,10,.92);
+
+border:1px solid #222;
+
+padding:22px;
+
 text-decoration:none;
-font-size:20px;
-letter-spacing:3px;
-box-shadow:0 0 20px rgba(255,0,0,.5);
-transition:.3s;
-}
 
-.menu-btn:hover{
-background:#a00000;
-transform:scale(1.03);
-box-shadow:0 0 30px red;
-}
-
-/* 聊天室按钮 */
-.chat-btn{
-display:block;
-width:85%;
-margin:20px auto;
-padding:18px;
-text-align:center;
-background:#101820;
-border:1px solid #00e5ff;
 color:white;
-text-decoration:none;
-font-size:20px;
-letter-spacing:3px;
-box-shadow:0 0 20px rgba(0,229,255,.4);
+
+position:relative;
+
+overflow:hidden;
+
 transition:.3s;
+
+box-shadow:0 0 20px rgba(255,0,0,.08);
+
 }
 
-.chat-btn:hover{
-background:#003b46;
-transform:scale(1.03);
-box-shadow:0 0 30px #00e5ff;
+.card:hover{
+
+transform:translateY(-4px);
+
+border-color:red;
+
+box-shadow:0 0 30px rgba(255,0,0,.22);
+
+}
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:-100%;
+
+width:100%;
+height:2px;
+
+background:red;
+
+animation:lineMove 4s linear infinite;
+
+}
+
+@keyframes lineMove{
+
+0%{
+left:-100%;
+}
+
+100%{
+left:100%;
+}
+
+}
+
+.card-title{
+
+font-size:24px;
+
+letter-spacing:3px;
+
+margin-bottom:8px;
+
+}
+
+.card-desc{
+
+color:#777;
+
+font-size:14px;
+
+line-height:1.6;
+
+}
+
+/* 不同板块颜色 */
+
+.red{
+border-left:4px solid red;
+}
+
+.blue{
+border-left:4px solid #00aaff;
+}
+
+.green{
+border-left:4px solid #00ff88;
+}
+
+.yellow{
+border-left:4px solid #ffcc00;
 }
 
 /* 底部 */
+
 .footer{
-margin-top:60px;
-padding-bottom:30px;
-color:#666;
-font-size:14px;
+
+margin-top:40px;
+
+text-align:center;
+
+color:#555;
+
+font-size:13px;
+
 letter-spacing:3px;
+
+padding-bottom:30px;
+
 }
+
+@media(max-width:768px){
+
+.title{
+font-size:42px;
+}
+
+.card-title{
+font-size:20px;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="scan"></div>
+
+<div class="particles" id="particles"></div>
+
 <div class="container">
 
-<img src="logo.png" class="logo">
+<!-- 顶部 -->
 
-<div class="title">SITE-84</div>
+<div class="top">
+
+<img src="logo.png"
+class="logo">
+
+<div class="title">
+
+SITE-84
+
+</div>
 
 <div class="subtitle">
+
 FOUNDATION INTERNAL NETWORK
+
+</div>
+
 </div>
 
 <!-- 用户信息 -->
+
 <div class="profile">
 
-<img id="avatar"
+<img
+id="avatar"
 class="avatar"
-src="https://tr.rbxcdn.com/30DAY-AvatarHeadshot-310C85C8A62E2B3D8E2F3A7A3B8B2A1-Png/150/150/AvatarHeadshot/Png/noFilter">
+src="logo.png"
+>
 
-<div class="username" id="username">
-LOADING...
-</div>
+<div
+class="username"
+id="username">
 
-<div class="role" id="role">
-MTF OPERATIVE
-</div>
-
-<div class="status">
-STATUS : VERIFIED
-</div>
+UNKNOWN
 
 </div>
 
-<!-- 功能按钮 -->
+<div
+class="role"
+id="role">
 
-<a href="scp.html" class="menu-btn">
+PERSONNEL
+
+</div>
+
+<div class="verify">
+
+IDENTITY VERIFIED
+
+</div>
+
+</div>
+
+<!-- 功能板块 -->
+
+<div class="menu">
+
+<a
+href="scp.html"
+class="card red">
+
+<div class="card-title">
+
 SCP DATABASE
+
+</div>
+
+<div class="card-desc">
+
+Access classified SCP archives and containment files.
+
+</div>
+
 </a>
 
-<a href="mtf.html" class="menu-btn">
+<a
+href="mtf.html"
+class="card blue">
+
+<div class="card-title">
+
 MTF COMMAND
+
+</div>
+
+<div class="card-desc">
+
+Mobile Task Force deployment and command system.
+
+</div>
+
 </a>
 
-<a href="departments.html" class="menu-btn">
+<a
+href="departments.html"
+class="card green">
+
+<div class="card-title">
+
 DEPARTMENTS
+
+</div>
+
+<div class="card-desc">
+
+Research, Security, Medical and Internal divisions.
+
+</div>
+
 </a>
 
-<a href="events.html" class="menu-btn">
+<a
+href="chat.html"
+class="card yellow">
+
+<div class="card-title">
+
+INTERNAL CHAT
+
+</div>
+
+<div class="card-desc">
+
+Real-time SITE-84 personnel communication network.
+
+</div>
+
+</a>
+
+<a
+href="status.html"
+class="card red">
+
+<div class="card-title">
+
+SERVER STATUS
+
+</div>
+
+<div class="card-desc">
+
+View current server status and system activity.
+
+</div>
+
+</a>
+
+<a
+href="events.html"
+class="card blue">
+
+<div class="card-title">
+
 SITE EVENTS
+
+</div>
+
+<div class="card-desc">
+
+Emergency alerts and ongoing containment events.
+
+</div>
+
 </a>
 
-<a href="status.html" class="menu-btn">
-SYSTEM STATUS
-</a>
+</div>
 
-<!-- 聊天室 -->
-<a href="chat.html" class="chat-btn">
-🛰 INTERNAL CHAT
-</a>
+<!-- 底部 -->
 
 <div class="footer">
+
 SITE-84 SECURE NETWORK
+
 </div>
 
 </div>
 
 <script>
+
+/* 粒子 */
+
+const particles =
+document.getElementById("particles");
+
+for(let i=0;i<60;i++){
+
+let p =
+document.createElement("div");
+
+p.classList.add("particle");
+
+p.style.left =
+Math.random()*100+"%";
+
+p.style.animationDuration =
+(8+Math.random()*10)+"s";
+
+p.style.animationDelay =
+Math.random()*5+"s";
+
+particles.appendChild(p);
+
+}
+
+/* 用户信息 */
+
 const username =
-localStorage.getItem("scpUser") || "UNKNOWN";
+localStorage.getItem("scpUser")
+|| "UNKNOWN";
 
 const role =
-localStorage.getItem("scpRole") || "GUEST";
+localStorage.getItem("scpRole")
+|| "PERSONNEL";
 
-document.getElementById("username").innerText = username;
+document.getElementById("username")
+.innerText = username;
 
-document.getElementById("role").innerText = role;
+document.getElementById("role")
+.innerText = role;
 
-// Roblox头像加载
-fetch("https://users.roblox.com/v1/usernames/users",{
+/* Roblox头像 */
+
+fetch(
+"https://users.roblox.com/v1/usernames/users",
+{
 method:"POST",
 headers:{
 "Content-Type":"application/json"
@@ -264,23 +665,28 @@ body:JSON.stringify({
 usernames:[username],
 excludeBannedUsers:false
 })
-})
+}
+)
 .then(res=>res.json())
 .then(data=>{
 
-if(data.data && data.data.length > 0){
+if(data.data &&
+data.data.length > 0){
 
-const userId = data.data[0].id;
+const userId =
+data.data[0].id;
 
-fetch(`https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=${userId}&size=150x150&format=Png&isCircular=false`)
+fetch(
+"https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds="
++ userId +
+"&size=150x150&format=Png&isCircular=false"
+)
 .then(res=>res.json())
 .then(avatarData=>{
 
-const imageUrl =
+document.getElementById("avatar")
+.src =
 avatarData.data[0].imageUrl;
-
-document.getElementById("avatar").src =
-imageUrl;
 
 });
 
@@ -288,8 +694,11 @@ imageUrl;
 
 })
 .catch(err=>{
+
 console.log(err);
+
 });
+
 </script>
 
 </body>
