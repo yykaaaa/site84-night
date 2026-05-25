@@ -109,7 +109,7 @@ opacity:0;
 
 .container{
 width:100%;
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -245,7 +245,8 @@ letter-spacing:2px;
 font-size:13px;
 }
 
-.input-group input{
+.input-group input,
+select{
 width:100%;
 padding:16px;
 background:#050505;
@@ -256,9 +257,15 @@ outline:none;
 transition:.3s;
 }
 
-.input-group input:focus{
+.input-group input:focus,
+select:focus{
 border-color:red;
 box-shadow:0 0 15px rgba(255,0,0,.2);
+}
+
+option{
+background:black;
+color:white;
 }
 
 /* 按钮 */
@@ -326,16 +333,34 @@ width:120px;
 border-radius:12px;
 margin-bottom:15px;
 box-shadow:0 0 20px rgba(255,0,0,.2);
+border:1px solid #333;
 }
 
 .profile h2{
 margin-bottom:10px;
+font-size:34px;
 }
 
 .profile p{
 color:#888;
-line-height:1.8;
+line-height:1.9;
+font-size:14px;
 }
+
+/* VERIFIED */
+
+.verified{
+display:inline-block;
+margin-top:12px;
+padding:8px 16px;
+background:#002200;
+border:1px solid #00ff88;
+color:#00ff88;
+font-size:13px;
+letter-spacing:2px;
+}
+
+/* 进入按钮 */
 
 .enter-btn{
 display:none;
@@ -348,6 +373,7 @@ color:white;
 font-size:18px;
 cursor:pointer;
 transition:.3s;
+letter-spacing:2px;
 }
 
 .enter-btn:hover{
@@ -390,9 +416,13 @@ padding:28px;
 
 <div class="login-box">
 
+<!-- LOGO -->
+
 <div class="logo">
 <img src="logo.png">
 </div>
+
+<!-- 标题 -->
 
 <div class="title">
 SITE-84
@@ -401,6 +431,8 @@ SITE-84
 <div class="subtitle">
 PERSONNEL VERIFICATION SYSTEM
 </div>
+
+<!-- 用户名 -->
 
 <div class="input-group">
 
@@ -413,6 +445,40 @@ placeholder="Enter Personnel Name"
 >
 
 </div>
+
+<!-- 身份 -->
+
+<div class="input-group">
+
+<label>PERSONNEL ROLE</label>
+
+<select id="role">
+
+<option>Researcher</option>
+
+<option>Security Department</option>
+
+<option>Internal Security</option>
+
+<option>MTF Operative</option>
+
+<option>Administrator</option>
+
+<option>Intelligence Agency</option>
+
+<option>Medical Department</option>
+
+<option>Engineering Department</option>
+
+<option>GOC Liaison</option>
+
+<option>D-Class</option>
+
+</select>
+
+</div>
+
+<!-- 按钮 -->
 
 <button class="login-btn" onclick="fakeLogin()">
 
@@ -436,11 +502,15 @@ INVALID PERSONNEL
 
 <div class="profile" id="profile">
 
-<img id="avatar">
+<img id="avatar" src="logo.png">
 
 <h2 id="displayName"></h2>
 
 <p id="userInfo"></p>
+
+<div class="verified">
+IDENTITY VERIFIED
+</div>
 
 </div>
 
@@ -482,12 +552,53 @@ particles.appendChild(p);
 
 }
 
-/* 假登录 */
+/* 生成ID */
+
+function generateId(name){
+
+let hash = 0;
+
+for(let i=0;i<name.length;i++){
+
+hash += name.charCodeAt(i);
+
+}
+
+return "RBX-" + (hash * 84);
+
+}
+
+/* HASH */
+
+function generateHash(){
+
+const chars =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+let result = "84-";
+
+for(let i=0;i<8;i++){
+
+result +=
+chars.charAt(
+Math.floor(Math.random()*chars.length)
+);
+
+}
+
+return result;
+
+}
+
+/* 登录 */
 
 function fakeLogin(){
 
 let username =
 document.getElementById("username").value.trim();
+
+let role =
+document.getElementById("role").value;
 
 let error =
 document.getElementById("error");
@@ -501,16 +612,15 @@ return;
 
 }
 
-/* 随机权限 */
+/* 权限 */
 
 const clearances = [
 
-"D-CLASS",
-"RESEARCHER",
-"MTF OPERATIVE",
+"LEVEL-1",
+"LEVEL-2",
 "LEVEL-3",
 "LEVEL-4",
-"O5 ACCESS"
+"O5"
 
 ];
 
@@ -519,10 +629,25 @@ clearances[
 Math.floor(Math.random()*clearances.length)
 ];
 
-/* 随机头像 */
+/* UID */
 
-let avatar =
-`https://robohash.org/${username}.png?size=300x300`;
+let rbxId =
+generateId(username);
+
+/* HASH */
+
+let authHash =
+generateHash();
+
+/* SESSION */
+
+let session =
+"NIGHT-" +
+Math.floor(Math.random()*99999);
+
+/* 本地头像 */
+
+let avatar = "logo.png";
 
 /* 显示 */
 
@@ -543,7 +668,15 @@ document.getElementById("userInfo")
 
 STATUS : VERIFIED
 <br>
+RBX ID : ${rbxId}
+<br>
+ROLE : ${role}
+<br>
 CLEARANCE : ${clearance}
+<br>
+AUTH HASH : ${authHash}
+<br>
+SESSION : ${session}
 <br>
 SITE : NIGHT SITE-84
 
