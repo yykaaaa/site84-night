@@ -21,11 +21,13 @@ overflow:hidden;
 color:white;
 }
 
-/* 背景 */
+/* 动态背景 */
 
 body::before{
 content:"";
 position:fixed;
+top:0;
+left:0;
 width:100%;
 height:100%;
 background:
@@ -66,6 +68,43 @@ pointer-events:none;
 z-index:99;
 }
 
+/* 粒子 */
+
+.particles{
+position:fixed;
+width:100%;
+height:100%;
+overflow:hidden;
+z-index:-1;
+}
+
+.particle{
+position:absolute;
+width:2px;
+height:2px;
+background:red;
+opacity:.4;
+animation:float 10s linear infinite;
+}
+
+@keyframes float{
+
+0%{
+transform:translateY(100vh);
+opacity:0;
+}
+
+10%{
+opacity:.5;
+}
+
+100%{
+transform:translateY(-10vh);
+opacity:0;
+}
+
+}
+
 /* 容器 */
 
 .container{
@@ -82,12 +121,27 @@ padding:20px;
 .login-box{
 width:430px;
 max-width:100%;
-background:rgba(0,0,0,.9);
+background:rgba(0,0,0,.92);
 border:1px solid #222;
 padding:40px;
 position:relative;
 overflow:hidden;
 box-shadow:0 0 35px rgba(255,0,0,.15);
+animation:fadeUp 1s ease;
+}
+
+@keyframes fadeUp{
+
+from{
+opacity:0;
+transform:translateY(20px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
 }
 
 .login-box::before{
@@ -113,7 +167,7 @@ left:100%;
 
 }
 
-/* LOGO */
+/* logo */
 
 .logo{
 text-align:center;
@@ -122,13 +176,13 @@ margin-bottom:20px;
 
 .logo img{
 width:130px;
-animation:float 4s ease-in-out infinite;
+animation:logoFloat 4s ease-in-out infinite;
 filter:
 drop-shadow(0 0 10px rgba(255,255,255,.15))
 drop-shadow(0 0 25px rgba(255,0,0,.25));
 }
 
-@keyframes float{
+@keyframes logoFloat{
 
 0%{
 transform:translateY(0);
@@ -154,6 +208,19 @@ text-shadow:
 0 0 10px red,
 0 0 25px red;
 margin-bottom:10px;
+animation:flicker 3s infinite;
+}
+
+@keyframes flicker{
+
+0%,18%,22%,25%,53%,57%,100%{
+opacity:1;
+}
+
+20%,24%,55%{
+opacity:.5;
+}
+
 }
 
 .subtitle{
@@ -186,6 +253,7 @@ border:1px solid #222;
 color:white;
 font-size:15px;
 outline:none;
+transition:.3s;
 }
 
 .input-group input:focus{
@@ -196,8 +264,7 @@ box-shadow:0 0 15px rgba(255,0,0,.2);
 /* 按钮 */
 
 .login-btn,
-.skip-btn,
-.enter-btn{
+.skip-btn{
 
 width:100%;
 padding:18px;
@@ -207,6 +274,7 @@ font-size:18px;
 cursor:pointer;
 transition:.3s;
 margin-top:12px;
+letter-spacing:2px;
 
 }
 
@@ -216,6 +284,7 @@ background:linear-gradient(90deg,#550000,#aa0000);
 
 .login-btn:hover{
 background:red;
+box-shadow:0 0 20px rgba(255,0,0,.25);
 }
 
 .skip-btn{
@@ -224,15 +293,6 @@ background:#222;
 
 .skip-btn:hover{
 background:#444;
-}
-
-.enter-btn{
-display:none;
-background:#006600;
-}
-
-.enter-btn:hover{
-background:#00aa00;
 }
 
 /* 用户信息 */
@@ -244,6 +304,21 @@ padding:20px;
 background:#050505;
 border:1px solid #222;
 text-align:center;
+animation:fade .5s;
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(10px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
 }
 
 .profile img{
@@ -260,6 +335,23 @@ margin-bottom:10px;
 .profile p{
 color:#888;
 line-height:1.8;
+}
+
+.enter-btn{
+display:none;
+width:100%;
+margin-top:20px;
+padding:18px;
+background:#006600;
+border:none;
+color:white;
+font-size:18px;
+cursor:pointer;
+transition:.3s;
+}
+
+.enter-btn:hover{
+background:#00aa00;
 }
 
 /* 错误 */
@@ -292,6 +384,8 @@ padding:28px;
 
 <div class="scan"></div>
 
+<div class="particles" id="particles"></div>
+
 <div class="container">
 
 <div class="login-box">
@@ -305,28 +399,28 @@ SITE-84
 </div>
 
 <div class="subtitle">
-ROBLOX PERSONNEL LOGIN
+PERSONNEL VERIFICATION SYSTEM
 </div>
 
 <div class="input-group">
 
-<label>ROBLOX USERNAME</label>
+<label>PERSONNEL NAME</label>
 
 <input
 type="text"
 id="username"
-placeholder="Enter Roblox Username"
+placeholder="Enter Personnel Name"
 >
 
 </div>
 
-<button class="login-btn" onclick="loginRoblox()">
+<button class="login-btn" onclick="fakeLogin()">
 
 VERIFY PERSONNEL
 
 </button>
 
-<button class="skip-btn" onclick="skipLogin()">
+<button class="skip-btn" onclick="enterSite()">
 
 SKIP LOGIN
 
@@ -334,7 +428,7 @@ SKIP LOGIN
 
 <div class="error" id="error">
 
-USER NOT FOUND
+INVALID PERSONNEL
 
 </div>
 
@@ -363,7 +457,34 @@ ACCESS SITE-84
 
 <script>
 
-async function loginRoblox(){
+/* 粒子 */
+
+const particles =
+document.getElementById("particles");
+
+for(let i=0;i<60;i++){
+
+let p =
+document.createElement("div");
+
+p.classList.add("particle");
+
+p.style.left =
+Math.random()*100+"%";
+
+p.style.animationDuration =
+(8+Math.random()*10)+"s";
+
+p.style.animationDelay =
+Math.random()*5+"s";
+
+particles.appendChild(p);
+
+}
+
+/* 假登录 */
+
+function fakeLogin(){
 
 let username =
 document.getElementById("username").value.trim();
@@ -373,49 +494,35 @@ document.getElementById("error");
 
 error.style.display = "none";
 
-if(username === "") return;
-
-try{
-
-/* 用户 */
-
-const response = await fetch(
-"https://users.roproxy.com/v1/usernames/users",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-usernames:[username],
-excludeBannedUsers:false
-})
-}
-);
-
-const data = await response.json();
-
-if(!data.data || data.data.length === 0){
+if(username === ""){
 
 error.style.display = "block";
 return;
 
 }
 
-const user = data.data[0];
+/* 随机权限 */
 
-const userId = user.id;
+const clearances = [
 
-/* 头像 */
+"D-CLASS",
+"RESEARCHER",
+"MTF OPERATIVE",
+"LEVEL-3",
+"LEVEL-4",
+"O5 ACCESS"
 
-const avatarResponse = await fetch(
-`https://thumbnails.roproxy.com/v1/users/avatar-headshot?userIds=${userId}&size=420x420&format=Png&isCircular=false`
-);
+];
 
-const avatarData = await avatarResponse.json();
+let clearance =
+clearances[
+Math.floor(Math.random()*clearances.length)
+];
 
-const avatar =
-avatarData.data[0].imageUrl;
+/* 随机头像 */
+
+let avatar =
+`https://robohash.org/${username}.png?size=300x300`;
 
 /* 显示 */
 
@@ -429,46 +536,24 @@ document.getElementById("avatar")
 .src = avatar;
 
 document.getElementById("displayName")
-.innerText = user.name;
+.innerText = username;
 
 document.getElementById("userInfo")
 .innerHTML = `
 
-USER ID : ${userId}
-<br>
-CLEARANCE : RESEARCHER
-<br>
 STATUS : VERIFIED
+<br>
+CLEARANCE : ${clearance}
+<br>
+SITE : NIGHT SITE-84
 
 `;
-
-}catch(e){
-
-error.style.display = "block";
-
-}
 
 }
 
 /* 进入 */
 
 function enterSite(){
-
-loadingScreen();
-
-}
-
-/* 跳过 */
-
-function skipLogin(){
-
-loadingScreen();
-
-}
-
-/* 加载动画 */
-
-function loadingScreen(){
 
 document.body.innerHTML = `
 
@@ -489,7 +574,7 @@ ACCESS GRANTED
 </h1>
 
 <div id="loadingText">
-CONNECTING TO SITE-84...
+CONNECTING TO NIGHT SITE-84...
 </div>
 
 </div>
