@@ -105,7 +105,7 @@ opacity:0;
 
 }
 
-/* 顶部 */
+/* 主界面 */
 
 .hero{
 height:100vh;
@@ -115,8 +115,6 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
-position:relative;
-overflow:hidden;
 }
 
 /* logo */
@@ -269,7 +267,7 @@ transition:.3s;
 background:red;
 }
 
-/* 状态 */
+/* 状态栏 */
 
 .status-bar{
 max-width:1000px;
@@ -375,4 +373,198 @@ SECURE • CONTAIN • PROTECT
 
 </section>
 
-<!-- 状
+<!-- 状态 -->
+
+<div class="status-bar">
+
+<div class="status-item">
+SITE STATUS<br>
+<span class="online">ONLINE</span>
+</div>
+
+<div class="status-item">
+CONTAINMENT<br>
+<span class="online">STABLE</span>
+</div>
+
+<div class="status-item">
+MTF RESPONSE<br>
+<span class="online">READY</span>
+</div>
+
+<div class="status-item">
+THREAT LEVEL<br>
+<span style="color:#ffaa00;">MODERATE</span>
+</div>
+
+</div>
+
+<!-- 板块 -->
+
+<section class="sections">
+
+<div class="card">
+
+<h2>SCP DATABASE</h2>
+
+<p>
+访问 SCP 收容档案与异常数据库。
+</p>
+
+<a href="events.html">
+进入数据库
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>DEPARTMENTS</h2>
+
+<p>
+SITE-84 内部部门与权限结构。
+</p>
+
+<a href="departments.html">
+进入部门
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>MTF COMMAND</h2>
+
+<p>
+机动特遣队部署与行动状态。
+</p>
+
+<a href="mtf.html">
+进入 MTF
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>SITE STATUS</h2>
+
+<p>
+查看站点服务器与系统状态。
+</p>
+
+<a href="status.html">
+查看状态
+</a>
+
+</div>
+
+</section>
+
+<!-- QQ -->
+
+<div class="qq">
+
+<a href="https://qm.qq.com/q/iIPAlLJQ7m">
+
+加入 SITE-84 QQ
+
+</a>
+
+</div>
+
+<!-- 底部 -->
+
+<div class="footer">
+
+NIGHT • SITE-84 INTERNAL NETWORK
+
+</div>
+
+<script>
+
+/* 粒子 */
+
+const particles =
+document.getElementById("particles");
+
+for(let i=0;i<70;i++){
+
+let p =
+document.createElement("div");
+
+p.classList.add("particle");
+
+p.style.left =
+Math.random()*100+"%";
+
+p.style.animationDuration =
+(8+Math.random()*10)+"s";
+
+p.style.animationDelay =
+Math.random()*5+"s";
+
+particles.appendChild(p);
+
+}
+
+/* 终端 */
+
+const lines = [
+
+"> CONNECTING TO SITE-84 NETWORK",
+"> SECURITY CLEARANCE VERIFIED",
+"> INTERNAL DATABASE ONLINE",
+"> MTF RESPONSE TEAM READY",
+"> SCP CONTAINMENT STATUS : STABLE",
+"> WELCOME TO NIGHT SITE-84"
+
+];
+
+let terminal =
+document.getElementById("terminal");
+
+let current = 0;
+
+function typeLine(){
+
+if(current >= lines.length){
+return;
+}
+
+let text = lines[current];
+
+let div =
+document.createElement("div");
+
+terminal.appendChild(div);
+
+let i = 0;
+
+let typing =
+setInterval(()=>{
+
+div.innerHTML += text.charAt(i);
+
+i++;
+
+if(i >= text.length){
+
+clearInterval(typing);
+
+current++;
+
+setTimeout(typeLine,350);
+
+}
+
+},25);
+
+}
+
+typeLine();
+
+</script>
+
+</body>
+</html>
