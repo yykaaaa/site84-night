@@ -407,13 +407,9 @@ padding:28px;
 
 <div class="login-box">
 
-<!-- LOGO -->
-
 <div class="logo">
 <img src="logo.png">
 </div>
-
-<!-- 标题 -->
 
 <div class="title">
 SITE-84
@@ -471,13 +467,13 @@ placeholder="Enter Personnel Name"
 
 <!-- 按钮 -->
 
-<button class="login-btn" onclick="fakeLogin()">
+<button class="login-btn">
 
 VERIFY PERSONNEL
 
 </button>
 
-<button class="skip-btn" onclick="enterSite()">
+<button class="skip-btn">
 
 SKIP LOGIN
 
@@ -499,8 +495,7 @@ IDENTITY VERIFIED
 
 </div>
 
-<button class="enter-btn" id="enterBtn"
-onclick="enterSite()">
+<button class="enter-btn" id="enterBtn">
 
 ACCESS SITE-84
 
@@ -537,9 +532,20 @@ particles.appendChild(p);
 
 }
 
+/* 获取按钮 */
+
+const loginBtn =
+document.querySelector(".login-btn");
+
+const skipBtn =
+document.querySelector(".skip-btn");
+
+const enterBtn =
+document.getElementById("enterBtn");
+
 /* 登录 */
 
-function fakeLogin(){
+loginBtn.addEventListener("click", function(){
 
 let username =
 document.getElementById("username").value.trim();
@@ -596,8 +602,7 @@ Math.floor(Math.random()*99999);
 document.getElementById("profile")
 .style.display = "block";
 
-document.getElementById("enterBtn")
-.style.display = "block";
+enterBtn.style.display = "block";
 
 document.getElementById("avatar")
 .src = "logo.png";
@@ -622,11 +627,11 @@ document.getElementById("userInfo")
 
 "SITE : NIGHT SITE-84";
 
-}
+});
 
 /* 进入主页 */
 
-function enterSite(){
+function goMain(){
 
 document.body.innerHTML = `
 
@@ -654,13 +659,21 @@ CONNECTING TO NIGHT SITE-84...
 
 `;
 
-setTimeout(()=>{
+setTimeout(function(){
 
 window.location.href = "main.html";
 
 },2200);
 
 }
+
+/* skip */
+
+skipBtn.addEventListener("click", goMain);
+
+/* enter */
+
+enterBtn.addEventListener("click", goMain);
 
 </script>
 
